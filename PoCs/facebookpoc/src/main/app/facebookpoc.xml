@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/current/mule-facebook.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <facebook:config-with-oauth name="Facebook" consumerKey="229148647510486" consumerSecret="c57478a97a27bc9c2bb14d4e12d1a941" scope="email,user_about_me,user_photos" doc:name="Facebook">
+        <facebook:oauth-callback-config domain="localhost" localPort="1100" remotePort="1100"/>
+    </facebook:config-with-oauth>
+    <http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8087" doc:name="HTTP Listener Configuration"/>
+    <flow name="facebookpocFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/>
+        <logger message="Facebook section has been initiated" level="INFO" doc:name="Logger"/>
+        <facebook:authorize config-ref="Facebook" doc:name="Facebook"/>
+        <choice doc:name="Choice">
+            <when expression="flowVars.OAuthAccessTokenId != null">
+                <logger message="OAuthAccessTokenId is --------- #[flowVars.OAuthAccessTokenId]" level="INFO" doc:name="Logger"/>
+                <set-payload value="Authorization Successful tokenid - #[flowVars.OAuthAccessTokenId]" doc:name="Set Payload"/>
+            </when>
+            <otherwise>
+                <logger message="Authorization Unsuccessful" level="INFO" doc:name="Logger"/>
+                <set-payload value="Authorization Failed." doc:name="Set Payload"/>
+            </otherwise>
+        </choice>
+    </flow>
+
+
+	<flow name="AutorizeFacebook" doc:name="AutorizeFacebook">
+		<http:inbound-endpoint exchange-pattern="request-response"
+			host="localhost" port="5555" doc:name="HTTP" path="facebookupdate" />
+		<facebook:authorize config-ref="Facebook" doc:name="Authorize" />
+		<choice doc:name="Choice">
+			<when expression="flowVars.OAuthAccessTokenId != null">
+				<logger message="Authorization Successful" level="INFO"
+					doc:name="Logger" />
+				<set-payload value="Facebook Authorization Successful"
+					doc:name="Set Payload" />
+			</when>
+			<otherwise>
+				<logger message="Authorization Failed" level="INFO" doc:name="Logger" />
+				<set-payload value="Facebook Authorization Failed"
+					doc:name="Set Payload" />
+			</otherwise>
+		</choice>
+	</flow>
+
+</mule>
