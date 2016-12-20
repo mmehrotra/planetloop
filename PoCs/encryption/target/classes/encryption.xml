@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:encryption="http://www.mulesoft.org/schema/mule/encryption" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mule/encryption/current/mule-encryption.xsd">
+    <encryption:config name="Encryption" doc:name="Encryption" defaultEncrypter="PGP_ENCRYPTER">
+        <encryption:pgp-encrypter-config publicKeyRingFileName="C:\Users\mmehro\Desktop\keys\DEV1\pubring.gpg" secretKeyRingFileName="C:\Users\mmehro\Desktop\keys\DEV1\secring.gpg" secretAliasId="1" secretPassphrase="Ralph@ESB" principal="Sapient PGP (ESB PGP) &lt;RalphLaurenESBDev@sapient.com&gt;"/>
+    </encryption:config>
+    <flow name="encryptionFlow">
+        <file:inbound-endpoint path="D:\mohit-test\hrs001" moveToDirectory="D:\mohit-test\hrs001\archive" responseTimeout="10000" doc:name="File"/>
+        <encryption:encrypt config-ref="Encryption" doc:name="Encryption"/>
+        <logger message="Payload is :  #[payload]" level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>

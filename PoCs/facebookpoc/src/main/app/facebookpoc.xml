@@ -9,16 +9,20 @@ http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
     <facebook:config-with-oauth name="Facebook" consumerKey="229148647510486" consumerSecret="c57478a97a27bc9c2bb14d4e12d1a941" scope="email,user_about_me,user_photos" doc:name="Facebook">
-        <facebook:oauth-callback-config domain="localhost" localPort="1100" remotePort="1100"/>
+        <facebook:oauth-callback-config domain="localhost" localPort="8088" remotePort="8088" path="authorize/callback/"/>
     </facebook:config-with-oauth>
     <http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8087" doc:name="HTTP Listener Configuration"/>
     <flow name="facebookpocFlow">
-        <http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/>
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/authorize" doc:name="HTTP"/>
         <logger message="Facebook section has been initiated" level="INFO" doc:name="Logger"/>
         <facebook:authorize config-ref="Facebook" doc:name="Facebook"/>
         <choice doc:name="Choice">
             <when expression="flowVars.OAuthAccessTokenId != null">
                 <logger message="OAuthAccessTokenId is --------- #[flowVars.OAuthAccessTokenId]" level="INFO" doc:name="Logger"/>
+                <facebook:logged-user-details config-ref="Facebook"  doc:name="Facebook"/>
+                <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+                <facebook:get-user-photos config-ref="Facebook" since="last two year" user="me" doc:name="Facebook"/>
+                <logger message="#[payload]" level="INFO" doc:name="Logger"/>
                 <set-payload value="Authorization Successful tokenid - #[flowVars.OAuthAccessTokenId]" doc:name="Set Payload"/>
             </when>
             <otherwise>
@@ -29,7 +33,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     </flow>
 
 
-	<flow name="AutorizeFacebook" doc:name="AutorizeFacebook">
+	<!-- <flow name="AutorizeFacebook" >
 		<http:inbound-endpoint exchange-pattern="request-response"
 			host="localhost" port="5555" doc:name="HTTP" path="facebookupdate" />
 		<facebook:authorize config-ref="Facebook" doc:name="Authorize" />
@@ -46,6 +50,6 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 					doc:name="Set Payload" />
 			</otherwise>
 		</choice>
-	</flow>
+	</flow> -->
 
 </mule>
