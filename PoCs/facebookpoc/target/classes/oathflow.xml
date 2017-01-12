@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+
+<http:listener-config name="HTTP_Listener_Configuration-1"  host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <http:request-config name="YoutubeOathRequestConfiguration" protocol="HTTPS" host="accounts.google.com" port="443" basePath="/o/oauth2" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="YoutubeServiceRequestConfiguration" protocol="HTTPS" host="www.googleapis.com" port="443" basePath="/youtube/v3" doc:name="HTTP Request Configuration"/>
+    <flow name="Server-Side-Oath2.0-CallBackFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/oauth2callback" allowedMethods="GET" doc:name="HTTP Auth Listener"/>
+        <choice doc:name="Choice">
+            <when expression="#[message.inboundProperties.'http.query.params'.code != null]">
+                <set-variable variableName="code" value="#[message.inboundProperties.'http.query.params'.code]" doc:name="Set Code Var"/>
+                <set-payload value="#[{'client_id':'197351435753-2fhss1ns49hihk0h5a2dfbv8op16afut.apps.googleusercontent.com','client_secret':'1Obs8_A893T7ccVnoQigOEiO', 'redirect_uri':'http://localhost:8081/oauth2callback','grant_type':'authorization_code', 'code': flowVars.code}]" doc:name="Set Payload"/>
+                <!--<set-property propertyName="Content-Type" value="application/x-www-form-urlencoded" doc:name="Property"/>-->
+                <!--<set-payload value="#[{'client_id':'197351435753-2fhss1ns49hihk0h5a2dfbv8op16afut.apps.googleusercontent.com', 'client_secret':'1Obs8_A893T7ccVnoQigOEiO', 'redirect_url':'http://localhost:8081/login', 'grant_type':'authorization_code', 'code': flowVars.code}]" doc:name="Set Payload"/>-->
+                <http:request config-ref="YoutubeOathRequestConfiguration" path="/token" method="POST" requestStreamingMode="NEVER" doc:name="YoutubeOath Request">
+                    <http:request-builder>
+                        <http:header headerName="Content-Type" value="application/x-www-form-urlencoded"/>
+
+                    </http:request-builder>
+                </http:request>
+                <set-variable variableName="result" value="#[payload]" doc:name="Store Payload"/>
+            </when>
+            <otherwise>
+                <set-variable variableName="result" value="{&quot;error&quot;: &quot;access denied&quot;} " doc:name="Store Payload"/>
+            </otherwise>
+        </choice>
+        <set-payload doc:name="Set Payload" value="#[flowVars.result]"/>
+        <exception-strategy ref="api-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <flow name="GetChannelList">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/getChannelsList" allowedMethods="GET" doc:name="HTTP"/>
+        <http:request config-ref="YoutubeServiceRequestConfiguration" path="/channels" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="part" value="contentDetails"/>
+                <http:query-param paramName="mine" value="true"/>
+                <http:header headerName="Authorization" value="Bearer #[message.inboundProperties.'http.query.params'.access_token]"/>
+            </http:request-builder>
+        </http:request>
+    </flow>
+    <apikit:mapping-exception-strategy name="api-apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <apikit:exception value="org.mule.module.http.internal.request.ResponseValidatorException"/>
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property" />
+            <byte-array-to-string-transformer doc:name="Byte Array to String"/>
+            <set-payload value="#[payload]" doc:name="Set Payload" />
+        </apikit:mapping>
+    </apikit:mapping-exception-strategy>
+</mule>
