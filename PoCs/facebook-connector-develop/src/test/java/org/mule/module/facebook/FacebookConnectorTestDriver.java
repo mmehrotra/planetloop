@@ -57,14 +57,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void loggedUserDetails()
     {
-        User user = connector.loggedUserDetails();
+        User user = connector.loggedUserDetails("id");
         assertNotNull(user.getId());
     }
     
     @Test
     public void searchPosts()
     {
-        List<Post> posts = connector.searchPosts("chacarita", "", "", "1", "2");
+        List<Post> posts = connector.searchPosts("chacarita", "", "", "1", "2","id");
         assertTrue(posts.size() > 0);
         assertNotNull(posts.get(0).getId());
     }
@@ -72,7 +72,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void searchUsers()
     {
-        List<User> users = connector.searchUsers("Norris", "", "", "1", "2");
+        List<User> users = connector.searchUsers("Norris", "", "", "1", "2","id");
         assertTrue(users.size() > 0);
         assertNotNull(users.get(0).getId());
     }
@@ -80,7 +80,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void searchPages()
     {
-        List<Page> pages = connector.searchPages("Norris", "", "", "2", "1");
+        List<Page> pages = connector.searchPages("Norris", "", "", "2", "1","id");
         assertTrue(pages.size() == 2);
         assertNotNull(pages.get(0).getId());
         assertNotNull(pages.get(1).getId());
@@ -89,7 +89,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void searchEvents()
     {
-        List<Event> events = connector.searchEvents("facebook", "", "", "2", "");
+        List<Event> events = connector.searchEvents("facebook", "", "", "2", "","id");
         assertTrue(events.size() == 2);
         for (Event event : events)
         {
@@ -101,7 +101,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void searchGroups()
     {
-        List<Group> groups = connector.searchGroups("programming", "", "", "3", "");
+        List<Group> groups = connector.searchGroups("programming", "", "", "3", "","id");
         assertTrue(groups.size() == 3);
         for (Group group : groups)
         {
@@ -113,14 +113,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void searchCheckins()
     {
-        List<Checkin> checkins = connector.searchCheckins("", "", "2", "");
+        List<Checkin> checkins = connector.searchCheckins("", "", "2", "","id");
         assertNotNull(checkins);
     }
     
     @Test
     public void getAlbum()
     {
-        final Album res = connector.getAlbum("99394368305", "");
+        final Album res = connector.getAlbum("99394368305", "","id");
         assertNotNull(res.getId());
         assertNotNull(res.getName());
         assertNotNull(res.getCoverPhoto());
@@ -130,7 +130,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getAlbumPhotos()
     {
-        List<Photo> photos = connector.getAlbumPhotos("99394368305", "", "", "3", "");
+        List<Photo> photos = connector.getAlbumPhotos("99394368305", "", "", "3", "","id");
         assertTrue(photos.size() == 3);
         for (Photo photo : photos)
         {
@@ -143,7 +143,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getAlbumComments()
     {
-        List<Comment> comments = connector.getAlbumComments("99394368305", "", "", "3", "");
+        List<Comment> comments = connector.getAlbumComments("99394368305", "", "", "3", "","id");
         assertTrue(comments.size() == 3);
         for (Comment comment : comments)
         {
@@ -156,7 +156,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getEvent()
     {
-        final Event event = connector.getEvent("331218348435", "");
+        final Event event = connector.getEvent("331218348435", "","id");
         assertNotNull(event);
         assertNotNull(event.getDescription());
         assertNotNull(event.getStartTime());
@@ -165,7 +165,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getEventWall()
     {
-        List<Post> posts = connector.getEventWall("234960973192305", "", "", "3", "");
+        List<Post> posts = connector.getEventWall("234960973192305", "", "", "3", "","id");
         assertTrue(posts.size() == 3);
         for (Post post : posts)
         {
@@ -178,7 +178,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getEventNoReply()
     {
-        List<User> users = connector.getEventNoReply("234960973192305", "", "", "2", "");
+        List<User> users = connector.getEventNoReply("234960973192305", "", "", "2", "","id");
         assertTrue(users.size() == 2);
         for (User user : users)
         {
@@ -190,7 +190,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getEventMaybe()
     {
-        List<User> users = connector.getEventMaybe("234960973192305", "", "", "2", "");
+        List<User> users = connector.getEventMaybe("234960973192305", "", "", "2", "","id");
         assertTrue(users.size() == 2);
         for (User user : users)
         {
@@ -202,7 +202,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getEventInvited()
     {
-        List<User> users = connector.getEventInvited("234960973192305", "", "", "2", "");
+        List<User> users = connector.getEventInvited("234960973192305", "", "", "2", "","id");
         assertTrue(users.size() == 2);
         for (User user : users)
         {
@@ -214,7 +214,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getEventAttending()
     {
-        List<User> users = connector.getEventAttending("234960973192305", "", "", "2", "");
+        List<User> users = connector.getEventAttending("234960973192305", "", "", "2", "","id");
         assertTrue(users.size() == 2);
         for (User user : users)
         {
@@ -226,14 +226,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void getEventPicture() throws Exception
     {
-        final byte[] res = connector.getEventPicture("234960973192305", "small");
+        final byte[] res = connector.getEventPicture("234960973192305", "small","id");
         assertNotNull(res);
     }
     
     @Test
     public void getGroup() throws Exception
     {
-        final Group res = connector.getGroup("195466193802264", "");
+        final Group res = connector.getGroup("195466193802264", "","id");
         assertNotNull(res.getId());
         assertNotNull(res.getDescription());
         assertNotNull(res.getOwner().getName());
@@ -242,7 +242,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getGroupWall()
     {
-        List<Post> posts = connector.getGroupWall("18708376680", "", "", "", "");
+        List<Post> posts = connector.getGroupWall("18708376680", "", "", "", "","id");
         assertTrue(posts.size() > 0);
         for (Post post : posts)
         {
@@ -254,7 +254,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getGroupMembers()
     {
-        List<Member> members = connector.getGroupMembers("18708376680", "", "", "", "");
+        List<Member> members = connector.getGroupMembers("18708376680", "", "", "", "","id");
         assertTrue(members.size() > 0);
         for (Member memeber : members)
         {
@@ -267,14 +267,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void getGroupPicture() throws Exception
     {
-        final byte[] res = connector.getGroupPicture("18708376680", "small");
+        final byte[] res = connector.getGroupPicture("18708376680", "small","id");
         assertNotNull(res);
     }
     
     @Test
     public void getLink()
     {
-        final Link res = connector.getLink("114961875194024", "");
+        final Link res = connector.getLink("114961875194024", "","id");
         assertNotNull(res.getId());
         assertNotNull(res.getFrom().getId());
     }
@@ -282,7 +282,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getLinkComments()
     {
-        List<Comment> comments = connector.getLinkComments("114961875194024", "", "", "1", "");
+        List<Comment> comments = connector.getLinkComments("114961875194024", "", "", "1", "","id");
         assertTrue(comments.size() == 1);
         for (Comment comment : comments)
         {
@@ -293,7 +293,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getNote()
     {
-        final Note note = connector.getNote("122788341354", "");
+        final Note note = connector.getNote("122788341354", "","id");
         assertNotNull(note);
         assertNotNull(note.getId());
         assertNotNull(note.getFrom().getName());
@@ -303,7 +303,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getNoteComments()
     {
-        List<Comment> comments = connector.getNoteComments("122788341354", "", "", "1", "");
+        List<Comment> comments = connector.getNoteComments("122788341354", "", "", "1", "","id");
         assertTrue(comments.size() == 1);
         for (Comment comment : comments)
         {
@@ -314,7 +314,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getNoteLikes()
     {
-        Likes likes = connector.getNoteLikes("122788341354", "", "", "2", "");
+        Likes likes = connector.getNoteLikes("122788341354", "", "", "2", "","id");
         assertTrue(likes.getData().size() == 2);
         for (NamedFacebookType like : likes.getData())
         {
@@ -326,7 +326,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPage()
     {
-        final Page page = connector.getPage("cocacola", "");
+        final Page page = connector.getPage("cocacola", "","id");
         assertNotNull(page);
         assertNotNull(page.getId());
         assertNotNull(page.getDescription());
@@ -336,7 +336,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPageWall()
     {
-        List<Post> posts = connector.getPageWall("cocacola", "", "", "2", "");
+        List<Post> posts = connector.getPageWall("cocacola", "", "", "2", "","id");
         assertTrue(posts.size() == 2);
         for (Post post : posts)
         {
@@ -349,14 +349,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPagePicture() throws Exception
     {
-        final byte[] res = connector.getPagePicture("cocacola", "large");
+        final byte[] res = connector.getPagePicture("cocacola", "large","id");
         assertNotNull(res);
     }
     
     @Test
     public void getPageTagged()
     {
-        List<Post> posts = connector.getPageTagged("cocacola", "", "", "2", "");
+        List<Post> posts = connector.getPageTagged("cocacola", "", "", "2", "","id");
         assertTrue(posts.size() == 2);
         for (Post post : posts)
         {
@@ -369,7 +369,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPagePhotos()
     {
-        List<Photo> photos = connector.getPagePhotos("cocacola", "", "", "2", "");
+        List<Photo> photos = connector.getPagePhotos("cocacola", "", "", "2", "","id");
         assertTrue(photos.size() == 2);
         for (Photo photo : photos)
         {
@@ -382,14 +382,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPageGroups()
     {
-        List<Group> groups = connector.getPageGroups("cocacola", "", "", "2", "");
+        List<Group> groups = connector.getPageGroups("cocacola", "", "", "2", "","id");
         assertNotNull(groups);
     }
     
     @Test
     public void getPageAlbums()
     {
-        List<Album> albums = connector.getPageAlbums("cocacola", "", "", "2", "");
+        List<Album> albums = connector.getPageAlbums("cocacola", "", "", "2", "","id");
         assertTrue(albums.size() == 2);
         for (Album album : albums)
         {
@@ -402,7 +402,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPageStatuses()
     {
-        List<StatusMessage> statuses = connector.getPageStatuses("cocacola", "", "", "2", "");
+        List<StatusMessage> statuses = connector.getPageStatuses("cocacola", "", "", "2", "","id");
         assertTrue(statuses.size() == 2);
         for (StatusMessage status : statuses)
         {
@@ -414,7 +414,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPageVideos()
     {
-        List<Video> videos = connector.getPageVideos("cocacola", "", "", "2", "");
+        List<Video> videos = connector.getPageVideos("cocacola", "", "", "2", "","id");
         assertTrue(videos.size() == 2);
         for (Video video : videos)
         {
@@ -427,7 +427,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPageNotes()
     {
-        List<Note> notes = connector.getPageNotes("cocacola", "", "", "1", "");
+        List<Note> notes = connector.getPageNotes("cocacola", "", "", "1", "","id");
         assertTrue(notes.size() == 1);
         for (Note note : notes)
         {
@@ -440,7 +440,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPagePosts()
     {
-        List<Post> posts = connector.getPagePosts("facebook", "", "", "3", "");
+        List<Post> posts = connector.getPagePosts("facebook", "", "", "3", "","id");
         assertTrue(posts.size() == 3);
         for (Post post : posts)
         {
@@ -453,7 +453,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPageEvents()
     {
-        List<Event> events = connector.getPageEvents("cocacola", "", "", "2", "");
+        List<Event> events = connector.getPageEvents("cocacola", "", "", "2", "","id");
         assertTrue(events.size() == 2);
         for (Event event : events)
         {
@@ -466,14 +466,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPageCheckins()
     {
-        List<Checkin> checkins = connector.getPageCheckins("cocacola", "", "", "2", "");
+        List<Checkin> checkins = connector.getPageCheckins("cocacola", "", "", "2", "","id");
         assertNotNull(checkins);
     }
     
     @Test
     public void getPhoto()
     {
-        org.mule.module.facebook.types.Photo photo = connector.getPhoto("20531316728", "");
+        org.mule.module.facebook.types.Photo photo = connector.getPhoto("20531316728", "","id");
         assertNotNull(photo);
         assertNotNull(photo.getId());
         assertNotNull(photo.getName());
@@ -484,7 +484,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPhotoComments()
     {
-        List<Comment> comments = connector.getPhotoComments("10151795798083306", "", "", "2", "");
+        List<Comment> comments = connector.getPhotoComments("10151795798083306", "", "", "2", "","id");
         assertTrue(comments.size() == 2);
         for (Comment comment : comments)
         {
@@ -496,7 +496,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPhotoLikes()
     {
-        Likes likes = connector.getPhotoLikes("10151795798083306", "", "", "2", "");
+        Likes likes = connector.getPhotoLikes("10151795798083306", "", "", "2", "","id");
         assertTrue(likes.getData().size() == 2);
         for (NamedFacebookType like : likes.getData())
         {
@@ -508,7 +508,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPost()
     {
-        final Post res = connector.getPost("19292868552_10150189643478553", "");
+        final Post res = connector.getPost("19292868552_10150189643478553", "","id");
         assertNotNull(res);
         assertNotNull(res.getFrom().getName());
         assertNotNull(res.getName());
@@ -518,7 +518,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getPostComments()
     {
-        List<Comment> comments = connector.getPostComments("10151795798083306", "", "", "2", "");
+        List<Comment> comments = connector.getPostComments("10151795798083306", "", "", "2", "","id");
         assertTrue(comments.size() == 2);
         for (Comment comment : comments)
         {
@@ -530,7 +530,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getStatus()
     {
-        StatusMessage status = connector.getStatus("367501354973", "0");
+        StatusMessage status = connector.getStatus("367501354973", "0","id");
         assertNotNull(status);
         assertNotNull(status.getFrom().getName());
         assertNotNull(status.getMessage());
@@ -539,7 +539,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getStatusComments()
     {
-        List<Comment> comments = connector.getStatusComments("367501354973", "", "", "2", "");
+        List<Comment> comments = connector.getStatusComments("367501354973", "", "", "2", "","id");
         assertTrue(comments.size() == 2);
         for (Comment comment : comments)
         {
@@ -551,7 +551,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUser()
     {
-        User user = connector.getUser("chackn", "0");
+        User user = connector.getUser("chackn", "0","id");
         assertNotNull(user);
         assertNotNull(user.getName());
         assertNotNull(user.getLastName());
@@ -560,7 +560,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserSearch()
     {
-        List<Post> posts = connector.getUserSearch("chackn", "a", "", "", "", "2", "");
+        List<Post> posts = connector.getUserSearch("chackn", "a", "", "", "", "2", "","id");
         assertTrue(posts.size() == 2);
         for (Post post : posts)
         {
@@ -571,7 +571,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserHome()
     {
-        List<Post> posts = connector.getUserHome("chackn", "", "", "1", "");
+        List<Post> posts = connector.getUserHome("chackn", "", "", "1", "","id");
         assertTrue(posts.size() == 1);
         for (Post post : posts)
         {
@@ -582,7 +582,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserWall()
     {
-        List<Post> posts = connector.getUserWall("chackn", "", "", "1", "");
+        List<Post> posts = connector.getUserWall("chackn", "", "", "1", "","id");
         assertTrue(posts.size() == 1);
         for (Post post : posts)
         {
@@ -593,14 +593,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserTagged()
     {
-        List<Post> posts = connector.getUserTagged("u2", "", "", "1", "");
+        List<Post> posts = connector.getUserTagged("u2", "", "", "1", "","id");
         assertNotNull(posts);
     }
     
     @Test
     public void getUserPosts()
     {
-        List<Post> posts = connector.getUserPosts("chackn", "", "", "2", "1");
+        List<Post> posts = connector.getUserPosts("chackn", "", "", "2", "1","id");
         assertTrue(posts.size() == 2);
         for (Post post : posts)
         {
@@ -612,14 +612,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserPicture() throws Exception
     {
-        final byte[] res = connector.getUserPicture("chackn", "large");
+        final byte[] res = connector.getUserPicture("chackn", "large","id");
         assertNotNull(res);
     }
     
     @Test
     public void getUserFriends()
     {
-        List<NamedFacebookType> users = connector.getUserFriends("chackn", "", "", "2", "1");
+        List<NamedFacebookType> users = connector.getUserFriends("chackn", "", "", "2", "1","id");
         assertTrue(users.size() == 2);
         for (NamedFacebookType user : users)
         {
@@ -632,56 +632,56 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserActivities()
     {
-        List<PageConnection> activities = connector.getUserActivities("chuckn", "", "", "2", "");
+        List<PageConnection> activities = connector.getUserActivities("chuckn", "", "", "2", "","id");
         assertNotNull(activities);
     }
     
     @Test
     public void getUserCheckins()
     {
-        List<Checkin> checkins = connector.getUserCheckins("chuckn", "", "", "2", "");
+        List<Checkin> checkins = connector.getUserCheckins("chuckn", "", "", "2", "","id");
         assertNotNull(checkins);
     }
     
     @Test
     public void getUserInterests()
     {
-        List<PageConnection> interests = connector.getUserInterests("chuckn", "", "", "2", "");
+        List<PageConnection> interests = connector.getUserInterests("chuckn", "", "", "2", "","id");
         assertNotNull(interests);
     }
     
     @Test
     public void getUserMusic()
     {
-        List<PageConnection> music = connector.getUserMusic("chuckn", "", "", "2", "");
+        List<PageConnection> music = connector.getUserMusic("chuckn", "", "", "2", "","id");
         assertNotNull(music);
     }
     
     @Test
     public void getUserBooks()
     {
-        List<PageConnection> books = connector.getUserBooks("chuckn", "", "", "2", "");
+        List<PageConnection> books = connector.getUserBooks("chuckn", "", "", "2", "","id");
         assertNotNull(books);
     }
     
     @Test
     public void getUserMovies()
     {
-        List<PageConnection> movies = connector.getUserMovies("chuckn", "", "", "2", "");
+        List<PageConnection> movies = connector.getUserMovies("chuckn", "", "", "2", "","id");
         assertNotNull(movies);
     }
     
     @Test
     public void getUserTelevision()
     {
-        List<PageConnection> television = connector.getUserTelevision("chuckn", "", "", "2", "");
+        List<PageConnection> television = connector.getUserTelevision("chuckn", "", "", "2", "","id");
         assertNotNull(television);
     }
     
     @Test
     public void getUserLikes()
     {
-        List<PageConnection> likes = connector.getUserLikes("cocacola", "", "", "2", "");
+        List<PageConnection> likes = connector.getUserLikes("cocacola", "", "", "2", "","id");
         assertNotNull(likes);
         assertTrue(likes.size() == 2);
         for (PageConnection like : likes)
@@ -694,7 +694,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserPhotos()
     {
-        List<Photo> photos = connector.getUserPhotos("cocacola", "", "", "2", "");
+        List<Photo> photos = connector.getUserPhotos("cocacola", "", "", "2", "","id");
         assertNotNull(photos);
         assertTrue(photos.size() == 2);
         for (Photo photo : photos)
@@ -707,7 +707,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserPhotosUploaded()
     {
-        List<Photo> photos = connector.getUserPhotosUploaded("cocacola", "", "", "2", "");
+        List<Photo> photos = connector.getUserPhotosUploaded("cocacola", "", "", "2", "","id");
         assertNotNull(photos);
         assertTrue(photos.size() == 2);
         for (Photo photo : photos)
@@ -720,7 +720,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserAlbums()
     {
-        List<Album> albums = connector.getUserAlbums("cocacola", "", "", "2", "");
+        List<Album> albums = connector.getUserAlbums("cocacola", "", "", "2", "","id");
         assertNotNull(albums);
         assertTrue(albums.size() == 2);
         for (Album album : albums)
@@ -733,7 +733,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserVideos()
     {
-        List<Video> videos = connector.getUserVideos("cocacola", "", "", "2", "");
+        List<Video> videos = connector.getUserVideos("cocacola", "", "", "2", "","id");
         assertNotNull(videos);
         assertTrue(videos.size() == 2);
         for (Video video : videos)
@@ -746,7 +746,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserVideosUploaded()
     {
-        List<Video> videos = connector.getUserVideosUploaded("cocacola", "", "", "2", "");
+        List<Video> videos = connector.getUserVideosUploaded("cocacola", "", "", "2", "","id");
         assertNotNull(videos);
         assertTrue(videos.size() == 2);
         for (Video video : videos)
@@ -759,14 +759,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserGroups()
     {
-        List<Group> groups = connector.getUserGroups("cocacola", "", "", "2", "");
+        List<Group> groups = connector.getUserGroups("cocacola", "", "", "2", "","id");
         assertNotNull(groups);
     }
     
     @Test
     public void getUserStatuses()
     {
-        List<StatusMessage> statuses = connector.getUserStatuses("cocacola", "", "", "2", "");
+        List<StatusMessage> statuses = connector.getUserStatuses("cocacola", "", "", "2", "","id");
         assertNotNull(statuses);
         assertTrue(statuses.size() == 2);
         for (StatusMessage status : statuses)
@@ -780,14 +780,14 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserLinks()
     {
-        List<Link> links = connector.getUserLinks("cocacola", "", "", "2", "");
+        List<Link> links = connector.getUserLinks("cocacola", "", "", "2", "","id");
         assertNotNull(links);
     }
     
     @Test
     public void getUserNotes()
     {
-        List<Note> notes = connector.getUserNotes("cocacola", "", "", "1", "");
+        List<Note> notes = connector.getUserNotes("cocacola", "", "", "1", "","id");
         assertNotNull(notes);
         assertTrue(notes.size() == 1);
         for (Note note : notes)
@@ -801,7 +801,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserEvents()
     {
-        List<Event> events = connector.getUserEvents("cocacola", "", "", "3", "");
+        List<Event> events = connector.getUserEvents("cocacola", "", "", "3", "","id");
         assertNotNull(events);
         assertTrue(events.size() == 3);
         for (Event event : events)
@@ -814,7 +814,7 @@ public class FacebookConnectorTestDriver
     @Ignore
     public void getUserInbox()
     {
-        List<org.mule.module.facebook.types.Thread> threads = connector.getUserInbox("chackn", "", "", "3", "");
+        List<org.mule.module.facebook.types.Thread> threads = connector.getUserInbox("chackn", "", "", "3", "","id");
         assertNotNull(threads);
         assertTrue(threads.size() == 3);
         for (Thread thread : threads)
@@ -829,7 +829,7 @@ public class FacebookConnectorTestDriver
     @Ignore
     public void getUserOutbox()
     {
-        List<OutboxThread> threads = connector.getUserOutbox("chackn", "", "", "3", "");
+        List<OutboxThread> threads = connector.getUserOutbox("chackn", "", "", "3", "","id");
         assertNotNull(threads);
         assertTrue(threads.size() == 3);
         for (Thread thread : threads)
@@ -844,7 +844,7 @@ public class FacebookConnectorTestDriver
     @Ignore
     public void getUserUpdates()
     {
-        List<OutboxThread> updates = connector.getUserUpdates("chackn", "", "", "3", "");
+        List<OutboxThread> updates = connector.getUserUpdates("chackn", "", "", "3", "","id");
         assertNotNull(updates);
         assertTrue(updates.size() == 3);
         for (Thread update : updates)
@@ -858,7 +858,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getUserAccounts()
     {
-        List<GetUserAccountResponseType> accounts = connector.getUserAccounts("chackn", "", "", "2", "");
+        List<GetUserAccountResponseType> accounts = connector.getUserAccounts("chackn", "", "", "2", "","id");
         assertNotNull(accounts);
         assertTrue(accounts.size() == 2);
         for (GetUserAccountResponseType account : accounts)
@@ -870,7 +870,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getVideo()
     {
-        final Video video = connector.getVideo("2031763147233", "0");
+        final Video video = connector.getVideo("2031763147233", "0","id");
         assertNotNull(video);
         assertNotNull(video.getFrom().getId());
         assertNotNull(video.getPicture());
@@ -879,7 +879,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void getVideoComments()
     {
-        List<Comment> comments = connector.getVideoComments("2031763147233", "", "", "2", "");
+        List<Comment> comments = connector.getVideoComments("2031763147233", "", "", "2", "","id");
         assertNotNull(comments);
         assertTrue(comments.size() == 2);
         for (Comment comment : comments)
@@ -908,7 +908,7 @@ public class FacebookConnectorTestDriver
     @Test
     public void like()
     {
-        List<Post> posts = connector.getUserPosts("chackn", "", "", "", "");
+        List<Post> posts = connector.getUserPosts("chackn", "", "", "", "","id");
         if (!posts.isEmpty())
         {
             final Post post = posts.get(0);

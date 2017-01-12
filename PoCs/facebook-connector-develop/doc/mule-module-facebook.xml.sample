@@ -1,9 +1,9 @@
 <!-- BEGIN_INCLUDE(facebook:logged-user-details) -->
-<facebook:logged-user-details config-ref="Facebook"/>
+<facebook:logged-user-details fields="id" config-ref="Facebook"/>
 <!-- END_INCLUDE(facebook:logged-user-details) -->
 
 <!-- BEGIN_INCLUDE(facebook:search-posts) -->
-	<facebook:search-posts q="muelsoft" config-ref="Facebook"/>
+	<facebook:search-posts q="muelsoft" fields="id" config-ref="Facebook"/>
 <!-- END_INCLUDE(facebook:search-posts) -->
 
 <!-- BEGIN_INCLUDE(facebook:search-users) -->
