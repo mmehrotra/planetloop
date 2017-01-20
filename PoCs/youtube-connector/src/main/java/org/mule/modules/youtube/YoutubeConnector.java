@@ -4,6 +4,8 @@ import org.mule.api.annotations.Config;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.param.Default;
+import org.mule.api.annotations.param.Optional;
+
 
 import java.io.IOException;
 import java.net.URI;
@@ -50,57 +52,147 @@ public class YoutubeConnector {
         client = Client.create(clientConfig);
     }
     
-  //********************************************************************************************************************************************
+  //***********************************************************Methods***********************************************************************
 
-    /**
-     * Channel List
-     *
-     * @param access_token user access_token
-     * @return The channel list.
-     * @throws YoutubeConnectorExceptionHandler 
-     */
-    @Processor
-//    @ReconnectOn(exceptions = { Exception.class })
-    public void getUserChannels(String access_token) throws YoutubeConnectorExceptionHandler{
-    	URI uri = UriBuilder.fromPath(YOUTUBE_URI).path("channels").build();
-    	WebResource resource = client.resource(uri).queryParam("part", "id").queryParam("mine", "true").queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, access_token);
-    	System.out.println(uri);
-    	ClientResponse clientResponse = resource.accept(MediaType.APPLICATION_JSON).method("GET", ClientResponse.class);
-        if(clientResponse.getStatus() == 200) {
-        	System.out.println(clientResponse.toString());
-        } else {
-        	throw new YoutubeConnectorExceptionHandler(
-        	          String.format("ERROR - statusCode: %d - message: %s",
-        	            clientResponse.getStatus(), clientResponse.getEntity(String.class)));
-        }
-    }
-
+//    /**
+//     * Channel List
+//     *
+//     * @param access_token user access_token
+//     * @return The channel list.
+//     * @throws YoutubeConnectorExceptionHandler 
+//     */
+//    @Processor
+////    @ReconnectOn(exceptions = { Exception.class })
+//    public void getUserChannels(String access_token) throws YoutubeConnectorExceptionHandler{
+//    	URI uri = UriBuilder.fromPath(YOUTUBE_URI).path("channels").build();
+//    	WebResource resource = client.resource(uri).queryParam("part", "id").queryParam("mine", "true").queryParam(ACCESS_TOKEN_QUERY_PARAM_NAME, access_token);
+//    	System.out.println(uri);
+//    	ClientResponse clientResponse = resource.accept(MediaType.APPLICATION_JSON).method("GET", ClientResponse.class);
+//        if(clientResponse.getStatus() == 200) {
+//        	System.out.println(clientResponse.toString());
+//        } else {
+//        	throw new YoutubeConnectorExceptionHandler(
+//        	          String.format("ERROR - statusCode: %d - message: %s",
+//        	            clientResponse.getStatus(), clientResponse.getEntity(String.class)));
+//        }
+//    }
     
     /**
-     * Search method
+     * Search most popular video on Youtube based on criterion given
      *
-     * @param access_token Name user access token
-//     * @return SearchListResponse the search result
+     * @param key Application API key
+     * @param query search query
+     * @param regionCode alpha-2 country code
+     * @param order sort the result set
+     * @param maxResults number of results per call [0:50]
+     * @param videoDuration length of video. short, medium, long
+     * @return SearchListSnippet the search result
      * @throws YoutubeConnectorExceptionHandler 
      */
     @Processor
-    public SearchResultSnippet getMostPopularVideos(@Default("slumdog millionaire") String query, @Default("video") String type, String key) throws YoutubeConnectorExceptionHandler{
+    public SearchResultSnippet searchVideos(String key,
+    								@Default("slumdog millionaire") String query, 
+    								@Optional String regionCode,
+    								@Optional String order,
+    								@Optional  @Default("10") String maxResults,
+    								@Optional String videoDuration
+    								) throws YoutubeConnectorExceptionHandler{
+    	URI uri = UriBuilder.fromPath(YOUTUBE_URI).path("search").build();
+    	WebResource resource = client.resource(uri).queryParam("part", "snippet").queryParam("type", "video").queryParam("key", key).queryParam("q", query);
+    	
+    	if (regionCode != null) resource.queryParam("regionCode", regionCode);
+    	if (order != null) resource.queryParam("order", order);
+    	if (maxResults != null) resource.queryParam("maxResults", maxResults);
+    	if (videoDuration != null) resource.queryParam("videoDuration", videoDuration);
+    	
+    	System.out.println(resource.toString());
+    	return execute(resource, "GET", SearchResultSnippet.class);
+    }
+    
+    /**
+     * Search most popular video/channel/playlist on Youtube based on criterion given
+     *
+     * @param key Application API key
+     * @param query search query
+     * @param regionCode alpha-2 country code
+     * @return SearchListSnippet the search result
+     * @throws YoutubeConnectorExceptionHandler 
+     */
+    @Processor
+    public SearchResultSnippet searchMostPopular(String key,
+    								@Default("slumdog millionaire") String query, 
+    								@Default("video") String type, 			 
+    								@Optional String regionCode) throws YoutubeConnectorExceptionHandler{
     	URI uri = UriBuilder.fromPath(YOUTUBE_URI).path("search").build();
     	WebResource resource = client.resource(uri).queryParam("part", "snippet").queryParam("q", query).queryParam("type", type).queryParam("key", key);
+    	
+    	if (regionCode != null) resource.queryParam("regionCode", regionCode);
+    	
     	System.out.println(resource.toString());
-    	ClientResponse clientResponse = resource.accept(MediaType.APPLICATION_JSON).method("GET", ClientResponse.class);
+    	return execute(resource, "GET", SearchResultSnippet.class);
+    }
+    
+    /**
+     * Search most recent video on Youtube based on criterion given
+     *
+     * @param key Application API key
+     * @param query search query
+     * @param regionCode alpha-2 country code
+     * @return SearchListSnippet the search result
+     * @throws YoutubeConnectorExceptionHandler 
+     */
+    @Processor
+    public SearchResultSnippet searchMostRecentVideos(String key,
+    								@Default("slumdog millionaire") String query, 
+    								@Optional String regionCode) throws YoutubeConnectorExceptionHandler{
+    	URI uri = UriBuilder.fromPath(YOUTUBE_URI).path("search").build();
+    	WebResource resource = client.resource(uri).queryParam("part", "snippet").queryParam("order", "date").queryParam("q", query).queryParam("type", "video").queryParam("key", key);
+    	
+    	if (regionCode != null) resource.queryParam("regionCode", regionCode);
+    	
+    	System.out.println(resource.toString());
+    	return execute(resource, "GET", SearchResultSnippet.class);
+    }
+    
+    /**
+     * Search video on Youtube related to video ID
+     *
+     * @param key Application API key
+     * @param relatedToVideoId Id Youtube Video Id
+     * @return SearchListSnippet the search result
+     * @throws YoutubeConnectorExceptionHandler 
+     */
+    @Processor
+    public SearchResultSnippet searchVideosRelatedToVideoId(String key,
+    								String relatedToVideoId, 
+    								@Optional String regionCode) throws YoutubeConnectorExceptionHandler{
+    	URI uri = UriBuilder.fromPath(YOUTUBE_URI).path("search").build();
+    	WebResource resource = client.resource(uri).queryParam("part", "snippet").queryParam("relatedToVideoId", relatedToVideoId).queryParam("type", "video").queryParam("key", key);
+    	
+    	if (regionCode != null) resource.queryParam("regionCode", regionCode);
+    	
+    	System.out.println(resource.toString());
+    	return execute(resource, "GET", SearchResultSnippet.class);
+    }
+  //*****************************************************************Helpers********************************************************************
+
+	/**
+     * Executes the Youtube request
+     *
+     */
+    private <T> T execute(WebResource webResource, String method, Class<T> returnClass) throws YoutubeConnectorExceptionHandler {
+        ClientResponse clientResponse = webResource.accept(MediaType.APPLICATION_JSON).method(method, ClientResponse.class);
         if(clientResponse.getStatus() == 200) {
         	System.out.println(clientResponse.toString());
-//        	System.out.println(clientResponse.getEntity(String.class));
-        	return clientResponse.getEntity(SearchResultSnippet.class);
+            return clientResponse.getEntity(returnClass);
         } else {
-        	throw new YoutubeConnectorExceptionHandler(
-        	          String.format("ERROR - statusCode: %d - message: %s",
-        	            clientResponse.getStatus(), clientResponse.getEntity(String.class)));
+            throw new YoutubeConnectorExceptionHandler(
+              String.format("ERROR - statusCode: %d - message: %s",
+                clientResponse.getStatus(), clientResponse.getEntity(String.class)));
         }
     }
-  //********************************************************************************************************************************************
-
+    
+  //***************************************************************Getters/Setters***************************************************************
     
     public ConnectorConfig getYoutubeConfig() {
         return YoutubeConfig;

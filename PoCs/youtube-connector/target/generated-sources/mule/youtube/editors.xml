@@ -26,25 +26,51 @@
       <group id="youtubeConnectorGeneric" caption="Basic Settings">
         <modeSwitch alwaysCombo="true" name="Youtube operations to execute" caption="Operation" description="Operation.">
           <no-operation abstractElement="http://www.mulesoft.org/schema/mule/youtube/abstractYoutubeConnectorGeneric" versions="[3.5.0,8.0.0]" connector-name="processor"></no-operation>
-          <mode modeId="http://www.mulesoft.org/schema/mule/youtube/get-most-popular-videos" modeLabel="Get most popular videos"></mode>
-          <mode modeId="http://www.mulesoft.org/schema/mule/youtube/get-user-channels" modeLabel="Get user channels"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/youtube/search-most-popular" modeLabel="Search most popular"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/youtube/search-most-recent-videos" modeLabel="Search most recent videos"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/youtube/search-videos" modeLabel="Search videos"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/youtube/search-videos-related-to-video-id" modeLabel="Search videos related to video id"></mode>
         </modeSwitch>
       </group>
     </attribute-category>
   </cloud-connector>
-  <cloud-connector returnType="com.google.api.services.youtube.model.SearchResultSnippet" caption="Get Most Popular Videos" icon="icons/theme.classic/youtube-connector-small.png" localId="get-most-popular-videos" image="icons/theme.classic/youtube-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/youtube/abstractYoutubeConnectorGeneric" metaData="static">
+  <cloud-connector returnType="com.google.api.services.youtube.model.SearchResultSnippet" caption="Search Most Popular" icon="icons/theme.classic/youtube-connector-small.png" localId="search-most-popular" image="icons/theme.classic/youtube-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/youtube/abstractYoutubeConnectorGeneric" metaData="static">
     <attribute-category caption="General" description="General.">
       <group id="general" caption="General">
-        <string name="key" caption="Key" description="" required="true" javaType="java.lang.String"></string>
-        <string defaultValue="slumdog millionaire" name="query" caption="Query" description="" required="false" javaType="java.lang.String"></string>
+        <string name="key" caption="Key" description="Application API key." required="true" javaType="java.lang.String"></string>
+        <string defaultValue="slumdog millionaire" name="query" caption="Query" description="Search query." required="false" javaType="java.lang.String"></string>
+        <string name="regionCode" caption="Region Code" description="Alpha-2 country code." required="false" javaType="java.lang.String"></string>
         <string defaultValue="video" name="type" caption="Type" description="" required="false" javaType="java.lang.String"></string>
       </group>
     </attribute-category>
   </cloud-connector>
-  <cloud-connector returnType="void" caption="Get User Channels" icon="icons/theme.classic/youtube-connector-small.png" localId="get-user-channels" image="icons/theme.classic/youtube-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/youtube/abstractYoutubeConnectorGeneric" metaData="static">
+  <cloud-connector returnType="com.google.api.services.youtube.model.SearchResultSnippet" caption="Search Most Recent Videos" icon="icons/theme.classic/youtube-connector-small.png" localId="search-most-recent-videos" image="icons/theme.classic/youtube-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/youtube/abstractYoutubeConnectorGeneric" metaData="static">
     <attribute-category caption="General" description="General.">
       <group id="general" caption="General">
-        <string name="access_token" caption="Access_token" description="User access_token." required="true" javaType="java.lang.String"></string>
+        <string name="key" caption="Key" description="Application API key." required="true" javaType="java.lang.String"></string>
+        <string defaultValue="slumdog millionaire" name="query" caption="Query" description="Search query." required="false" javaType="java.lang.String"></string>
+        <string name="regionCode" caption="Region Code" description="Alpha-2 country code." required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.google.api.services.youtube.model.SearchResultSnippet" caption="Search Videos" icon="icons/theme.classic/youtube-connector-small.png" localId="search-videos" image="icons/theme.classic/youtube-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/youtube/abstractYoutubeConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="key" caption="Key" description="Application API key." required="true" javaType="java.lang.String"></string>
+        <string defaultValue="10" name="maxResults" caption="Max Results" description="Number of results per call [0:50]." required="false" javaType="java.lang.String"></string>
+        <string name="order" caption="Order" description="Sort the result set." required="false" javaType="java.lang.String"></string>
+        <string defaultValue="slumdog millionaire" name="query" caption="Query" description="Search query." required="false" javaType="java.lang.String"></string>
+        <string name="regionCode" caption="Region Code" description="Alpha-2 country code." required="false" javaType="java.lang.String"></string>
+        <string name="videoDuration" caption="Video Duration" description="Length of video. short, medium, long." required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="com.google.api.services.youtube.model.SearchResultSnippet" caption="Search Videos Related To Video Id" icon="icons/theme.classic/youtube-connector-small.png" localId="search-videos-related-to-video-id" image="icons/theme.classic/youtube-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/youtube/abstractYoutubeConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="key" caption="Key" description="Application API key." required="true" javaType="java.lang.String"></string>
+        <string name="regionCode" caption="Region Code" description="" required="false" javaType="java.lang.String"></string>
+        <string name="relatedToVideoId" caption="Related To Video Id" description="Id Youtube Video Id." required="true" javaType="java.lang.String"></string>
       </group>
     </attribute-category>
   </cloud-connector>

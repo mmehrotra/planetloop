@@ -65,8 +65,8 @@
       "isBatch": false,
       "samples": [],
       "javaReturnType": {
-        "javaTypeName": "",
-        "fullQualifiedJavaTypeName": "void",
+        "javaTypeName": "SearchResultSnippet",
+        "fullQualifiedJavaTypeName": "com.google.api.services.youtube.model.SearchResultSnippet",
         "isOptional": false,
         "isRefOnly": false,
         "isPayload": false,
@@ -74,7 +74,7 @@
         "isEnum": false,
         "isString": false,
         "isHttpCallback": false,
-        "description": "The channel list."
+        "description": "SearchListSnippet the search result"
       },
       "parameters": [
         {
@@ -89,15 +89,92 @@
           "typeMirror": "java.lang.String",
           "isHttpCallback": false,
           "isArrayOrListOrMap": false,
-          "javaName": "access_token",
-          "description": "user access_token"
+          "javaName": "key",
+          "description": "Application API key"
+        },
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "defaultValue": "slumdog millionaire",
+          "isOptional": true,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "query",
+          "description": "search query"
+        },
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "isOptional": true,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "regionCode",
+          "description": "alpha-2 country code"
+        },
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "isOptional": true,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "order",
+          "description": "sort the result set"
+        },
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "defaultValue": "10",
+          "isOptional": true,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "maxResults",
+          "description": "number of results per call [0:50]"
+        },
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "isOptional": true,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "videoDuration",
+          "description": "length of video. short, medium, long"
         }
       ],
       "apiDocUrl": "",
-      "javaName": "getUserChannels",
-      "friendlyName": "Get user channels",
-      "description": "Channel List",
-      "xsdName": "get-user-channels"
+      "javaName": "searchVideos",
+      "friendlyName": "Search videos",
+      "description": "Search most popular video on Youtube based on criterion given",
+      "xsdName": "search-videos"
     },
     {
       "isPaged": false,
@@ -113,9 +190,24 @@
         "isEnum": false,
         "isString": false,
         "isHttpCallback": false,
-        "description": ""
+        "description": "SearchListSnippet the search result"
       },
       "parameters": [
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "isOptional": false,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "key",
+          "description": "Application API key"
+        },
         {
           "javaTypeName": "String",
           "fullQualifiedJavaTypeName": "java.lang.String",
@@ -129,7 +221,8 @@
           "typeMirror": "java.lang.String",
           "isHttpCallback": false,
           "isArrayOrListOrMap": false,
-          "javaName": "query"
+          "javaName": "query",
+          "description": "search query"
         },
         {
           "javaTypeName": "String",
@@ -149,6 +242,45 @@
         {
           "javaTypeName": "String",
           "fullQualifiedJavaTypeName": "java.lang.String",
+          "isOptional": true,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "regionCode",
+          "description": "alpha-2 country code"
+        }
+      ],
+      "apiDocUrl": "",
+      "javaName": "searchMostPopular",
+      "friendlyName": "Search most popular",
+      "description": "Search most popular video/channel/playlist on Youtube based on criterion given",
+      "xsdName": "search-most-popular"
+    },
+    {
+      "isPaged": false,
+      "isBatch": false,
+      "samples": [],
+      "javaReturnType": {
+        "javaTypeName": "SearchResultSnippet",
+        "fullQualifiedJavaTypeName": "com.google.api.services.youtube.model.SearchResultSnippet",
+        "isOptional": false,
+        "isRefOnly": false,
+        "isPayload": false,
+        "isComplexType": false,
+        "isEnum": false,
+        "isString": false,
+        "isHttpCallback": false,
+        "description": "SearchListSnippet the search result"
+      },
+      "parameters": [
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
           "isOptional": false,
           "isRefOnly": false,
           "isPayload": false,
@@ -158,14 +290,114 @@
           "typeMirror": "java.lang.String",
           "isHttpCallback": false,
           "isArrayOrListOrMap": false,
-          "javaName": "key"
+          "javaName": "key",
+          "description": "Application API key"
+        },
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "defaultValue": "slumdog millionaire",
+          "isOptional": true,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "query",
+          "description": "search query"
+        },
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "isOptional": true,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "regionCode",
+          "description": "alpha-2 country code"
         }
       ],
       "apiDocUrl": "",
-      "javaName": "getMostPopularVideos",
-      "friendlyName": "Get most popular videos",
-      "description": "Search method",
-      "xsdName": "get-most-popular-videos"
+      "javaName": "searchMostRecentVideos",
+      "friendlyName": "Search most recent videos",
+      "description": "Search most recent video on Youtube based on criterion given",
+      "xsdName": "search-most-recent-videos"
+    },
+    {
+      "isPaged": false,
+      "isBatch": false,
+      "samples": [],
+      "javaReturnType": {
+        "javaTypeName": "SearchResultSnippet",
+        "fullQualifiedJavaTypeName": "com.google.api.services.youtube.model.SearchResultSnippet",
+        "isOptional": false,
+        "isRefOnly": false,
+        "isPayload": false,
+        "isComplexType": false,
+        "isEnum": false,
+        "isString": false,
+        "isHttpCallback": false,
+        "description": "SearchListSnippet the search result"
+      },
+      "parameters": [
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "isOptional": false,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "key",
+          "description": "Application API key"
+        },
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "isOptional": false,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "relatedToVideoId",
+          "description": "Id Youtube Video Id"
+        },
+        {
+          "javaTypeName": "String",
+          "fullQualifiedJavaTypeName": "java.lang.String",
+          "isOptional": true,
+          "isRefOnly": false,
+          "isPayload": false,
+          "isComplexType": false,
+          "isEnum": false,
+          "isString": true,
+          "typeMirror": "java.lang.String",
+          "isHttpCallback": false,
+          "isArrayOrListOrMap": false,
+          "javaName": "regionCode"
+        }
+      ],
+      "apiDocUrl": "",
+      "javaName": "searchVideosRelatedToVideoId",
+      "friendlyName": "Search videos related to video id",
+      "description": "Search video on Youtube related to video ID",
+      "xsdName": "search-videos-related-to-video-id"
     }
   ],
   "filters": [],

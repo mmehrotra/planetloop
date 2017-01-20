@@ -11,7 +11,8 @@ http://www.mulesoft.org/schema/mule/youtube http://www.mulesoft.org/schema/mule/
     <youtube:config name="Youtube_Configuration" clientId="clientId" clientSecret="clientSecret" doc:name="Youtube: Configuration"/>
     <flow name="youtubepocFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/searchMostPopular" allowedMethods="GET" doc:name="HTTP"/>
-        <youtube:get-most-popular-videos config-ref="Youtube_Configuration" key="AIzaSyBgaD3otLlkgMtACvRiNEolNvqDFK4L5Wo" doc:name="Youtube"/>
+        <youtube:search-videos config-ref="Youtube_Configuration" key="AIzaSyBgaD3otLlkgMtACvRiNEolNvqDFK4L5Wo" order="" regionCode="JM" maxResults="" videoDuration="" doc:name="Youtube"/>
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+        <set-payload value="{code: 200}" doc:name="Set Payload"/>
     </flow>
 </mule>

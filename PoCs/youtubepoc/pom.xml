@@ -144,6 +144,11 @@
             <version>3.2.2</version>
             <scope>provided</scope>
         </dependency>
+    <dependency>
+            <groupId>com.ralphlauren.mule.modules</groupId>
+            <artifactId>mule-module-correlationId</artifactId>
+            <version>1.2-RELEASE</version>
+        </dependency>
     </dependencies>
 
 	<repositories>

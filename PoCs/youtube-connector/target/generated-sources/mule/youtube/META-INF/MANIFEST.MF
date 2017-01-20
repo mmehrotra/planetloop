@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Youtube
 Bundle-SymbolicName: org.mule.tooling.ui.contribution.youtube.3.5.0;singleton:=true
-Bundle-Version: 1.0.0.201701182127
+Bundle-Version: 1.0.0.201701192025
 Bundle-Activator: org.mule.tooling.ui.contribution.YoutubeActivator
 Bundle-Vendor: 
 Require-Bundle: org.eclipse.ui,

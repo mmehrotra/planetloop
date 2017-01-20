@@ -162,6 +162,11 @@
             <artifactId>mule-module-objectstore</artifactId>
             <version>2.3.0-RELEASE</version>
         </dependency>
+    <dependency>
+            <groupId>com.ralphlauren.mule.modules</groupId>
+            <artifactId>mule-module-countdown-latch</artifactId>
+            <version>2.1.1-RELEASE</version>
+        </dependency>
     </dependencies>
 
 	<repositories>

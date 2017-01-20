@@ -3,4 +3,5 @@
     <name>youtubepoc</name>
     <description></description>
     <muleExtension name="Youtube" qualifier="org.mule.tooling.ui.contribution.youtube.3.5.0"/>
+    <muleExtension name="Mule Module CorrelationId" qualifier="org.mule.tooling.ui.contribution.CorrelationId.3.6.0"/>
 </mule-project>

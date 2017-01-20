@@ -35,12 +35,12 @@
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  <xs:element xmlns="http://www.mulesoft.org/schema/mule/youtube" xmlns:mule="http://www.mulesoft.org/schema/mule/core" type="Get-user-channelsType" substitutionGroup="mule:abstract-message-processor" name="get-user-channels">
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/youtube" xmlns:mule="http://www.mulesoft.org/schema/mule/core" type="Search-videosType" substitutionGroup="mule:abstract-message-processor" name="search-videos">
     <xs:annotation>
-      <xs:documentation>Channel List</xs:documentation>
+      <xs:documentation>Search most popular video on Youtube based on criterion given</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name="Get-user-channelsType">
+  <xs:complexType name="Search-videosType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
         <xs:attribute type="xs:string" use="required" name="config-ref">
@@ -48,20 +48,45 @@
             <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute type="xs:string" use="required" name="access_token">
+        <xs:attribute type="xs:string" use="required" name="key">
           <xs:annotation>
-            <xs:documentation>user access_token</xs:documentation>
+            <xs:documentation>Application API key</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="xs:string" use="optional" default="slumdog millionaire" name="query">
+          <xs:annotation>
+            <xs:documentation>search query</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="xs:string" use="optional" name="regionCode">
+          <xs:annotation>
+            <xs:documentation>alpha-2 country code</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="xs:string" use="optional" name="order">
+          <xs:annotation>
+            <xs:documentation>sort the result set</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="xs:string" use="optional" default="10" name="maxResults">
+          <xs:annotation>
+            <xs:documentation>number of results per call [0:50]</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="xs:string" use="optional" name="videoDuration">
+          <xs:annotation>
+            <xs:documentation>length of video. short, medium, long</xs:documentation>
           </xs:annotation>
         </xs:attribute>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element xmlns="http://www.mulesoft.org/schema/mule/youtube" xmlns:mule="http://www.mulesoft.org/schema/mule/core" type="Get-most-popular-videosType" substitutionGroup="mule:abstract-message-processor" name="get-most-popular-videos">
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/youtube" xmlns:mule="http://www.mulesoft.org/schema/mule/core" type="Search-most-popularType" substitutionGroup="mule:abstract-message-processor" name="search-most-popular">
     <xs:annotation>
-      <xs:documentation>Search method</xs:documentation>
+      <xs:documentation>Search most popular video/channel/playlist on Youtube based on criterion given</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:complexType name="Get-most-popular-videosType">
+  <xs:complexType name="Search-most-popularType">
     <xs:complexContent>
       <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
         <xs:attribute type="xs:string" use="required" name="config-ref">
@@ -69,9 +94,14 @@
             <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
+        <xs:attribute type="xs:string" use="required" name="key">
+          <xs:annotation>
+            <xs:documentation>Application API key</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute type="xs:string" use="optional" default="slumdog millionaire" name="query">
           <xs:annotation>
-            <xs:documentation></xs:documentation>
+            <xs:documentation>search query</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute type="xs:string" use="optional" default="video" name="type">
@@ -79,7 +109,69 @@
             <xs:documentation></xs:documentation>
           </xs:annotation>
         </xs:attribute>
+        <xs:attribute type="xs:string" use="optional" name="regionCode">
+          <xs:annotation>
+            <xs:documentation>alpha-2 country code</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/youtube" xmlns:mule="http://www.mulesoft.org/schema/mule/core" type="Search-most-recent-videosType" substitutionGroup="mule:abstract-message-processor" name="search-most-recent-videos">
+    <xs:annotation>
+      <xs:documentation>Search most recent video on Youtube based on criterion given</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="Search-most-recent-videosType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute type="xs:string" use="required" name="config-ref">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
         <xs:attribute type="xs:string" use="required" name="key">
+          <xs:annotation>
+            <xs:documentation>Application API key</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="xs:string" use="optional" default="slumdog millionaire" name="query">
+          <xs:annotation>
+            <xs:documentation>search query</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="xs:string" use="optional" name="regionCode">
+          <xs:annotation>
+            <xs:documentation>alpha-2 country code</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns="http://www.mulesoft.org/schema/mule/youtube" xmlns:mule="http://www.mulesoft.org/schema/mule/core" type="Search-videos-related-to-video-idType" substitutionGroup="mule:abstract-message-processor" name="search-videos-related-to-video-id">
+    <xs:annotation>
+      <xs:documentation>Search video on Youtube related to video ID</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="Search-videos-related-to-video-idType">
+    <xs:complexContent>
+      <xs:extension xmlns:mule="http://www.mulesoft.org/schema/mule/core" base="mule:abstractMessageProcessorType">
+        <xs:attribute type="xs:string" use="required" name="config-ref">
+          <xs:annotation>
+            <xs:documentation>Specify which configuration to use for this invocation.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="xs:string" use="required" name="key">
+          <xs:annotation>
+            <xs:documentation>Application API key</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="xs:string" use="required" name="relatedToVideoId">
+          <xs:annotation>
+            <xs:documentation>Id Youtube Video Id</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute type="xs:string" use="optional" name="regionCode">
           <xs:annotation>
             <xs:documentation></xs:documentation>
           </xs:annotation>

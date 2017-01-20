@@ -33,24 +33,30 @@ import org.mule.security.oauth.callback.ProcessCallback;
 
 
 /**
- * GetMostPopularVideosMessageProcessor invokes the {@link org.mule.modules.youtube.YoutubeConnector#getMostPopularVideos(java.lang.String, java.lang.String, java.lang.String)} method in {@link YoutubeConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+ * SearchVideosMessageProcessor invokes the {@link org.mule.modules.youtube.YoutubeConnector#searchVideos(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)} method in {@link YoutubeConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-01-18T09:27:01-05:00", comments = "Build UNNAMED.2793.f49b6c7")
-public class GetMostPopularVideosMessageProcessor
+@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-01-19T08:25:21-05:00", comments = "Build UNNAMED.2793.f49b6c7")
+public class SearchVideosMessageProcessor
     extends DevkitBasedMessageProcessor
     implements MessageProcessor, OperationMetaDataEnabled
 {
 
-    protected Object query;
-    protected String _queryType;
-    protected Object type;
-    protected String _typeType;
     protected Object key;
     protected String _keyType;
+    protected Object query;
+    protected String _queryType;
+    protected Object regionCode;
+    protected String _regionCodeType;
+    protected Object order;
+    protected String _orderType;
+    protected Object maxResults;
+    protected String _maxResultsType;
+    protected Object videoDuration;
+    protected String _videoDurationType;
 
-    public GetMostPopularVideosMessageProcessor(String operationName) {
+    public SearchVideosMessageProcessor(String operationName) {
         super(operationName);
     }
 
@@ -84,6 +90,33 @@ public class GetMostPopularVideosMessageProcessor
     }
 
     /**
+     * Sets regionCode
+     * 
+     * @param value Value to set
+     */
+    public void setRegionCode(Object value) {
+        this.regionCode = value;
+    }
+
+    /**
+     * Sets videoDuration
+     * 
+     * @param value Value to set
+     */
+    public void setVideoDuration(Object value) {
+        this.videoDuration = value;
+    }
+
+    /**
+     * Sets maxResults
+     * 
+     * @param value Value to set
+     */
+    public void setMaxResults(Object value) {
+        this.maxResults = value;
+    }
+
+    /**
      * Sets query
      * 
      * @param value Value to set
@@ -93,21 +126,21 @@ public class GetMostPopularVideosMessageProcessor
     }
 
     /**
-     * Sets type
-     * 
-     * @param value Value to set
-     */
-    public void setType(Object value) {
-        this.type = value;
-    }
-
-    /**
      * Sets key
      * 
      * @param value Value to set
      */
     public void setKey(Object value) {
         this.key = value;
+    }
+
+    /**
+     * Sets order
+     * 
+     * @param value Value to set
+     */
+    public void setOrder(Object value) {
+        this.order = value;
     }
 
     /**
@@ -122,9 +155,12 @@ public class GetMostPopularVideosMessageProcessor
         Object moduleObject = null;
         try {
             moduleObject = findOrCreate(null, false, event);
-            final String _transformedQuery = ((String) evaluateAndTransform(getMuleContext(), event, GetMostPopularVideosMessageProcessor.class.getDeclaredField("_queryType").getGenericType(), null, query));
-            final String _transformedType = ((String) evaluateAndTransform(getMuleContext(), event, GetMostPopularVideosMessageProcessor.class.getDeclaredField("_typeType").getGenericType(), null, type));
-            final String _transformedKey = ((String) evaluateAndTransform(getMuleContext(), event, GetMostPopularVideosMessageProcessor.class.getDeclaredField("_keyType").getGenericType(), null, key));
+            final String _transformedKey = ((String) evaluateAndTransform(getMuleContext(), event, SearchVideosMessageProcessor.class.getDeclaredField("_keyType").getGenericType(), null, key));
+            final String _transformedQuery = ((String) evaluateAndTransform(getMuleContext(), event, SearchVideosMessageProcessor.class.getDeclaredField("_queryType").getGenericType(), null, query));
+            final String _transformedRegionCode = ((String) evaluateAndTransform(getMuleContext(), event, SearchVideosMessageProcessor.class.getDeclaredField("_regionCodeType").getGenericType(), null, regionCode));
+            final String _transformedOrder = ((String) evaluateAndTransform(getMuleContext(), event, SearchVideosMessageProcessor.class.getDeclaredField("_orderType").getGenericType(), null, order));
+            final String _transformedMaxResults = ((String) evaluateAndTransform(getMuleContext(), event, SearchVideosMessageProcessor.class.getDeclaredField("_maxResultsType").getGenericType(), null, maxResults));
+            final String _transformedVideoDuration = ((String) evaluateAndTransform(getMuleContext(), event, SearchVideosMessageProcessor.class.getDeclaredField("_videoDurationType").getGenericType(), null, videoDuration));
             Object resultPayload;
             final ProcessTemplate<Object, Object> processTemplate = ((ProcessAdapter<Object> ) moduleObject).getProcessTemplate();
             resultPayload = processTemplate.execute(new ProcessCallback<Object,Object>() {
@@ -141,7 +177,7 @@ public class GetMostPopularVideosMessageProcessor
                 public Object process(Object object)
                     throws Exception
                 {
-                    return ((YoutubeConnector) object).getMostPopularVideos(_transformedQuery, _transformedType, _transformedKey);
+                    return ((YoutubeConnector) object).searchVideos(_transformedKey, _transformedQuery, _transformedRegionCode, _transformedOrder, _transformedMaxResults, _transformedVideoDuration);
                 }
 
             }
@@ -185,7 +221,7 @@ public class GetMostPopularVideosMessageProcessor
                     return metadata;
                 }
                 if (metadata.get() == null) {
-                    return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error processing metadata at YoutubeConnector at getMostPopularVideos retrieving was successful but result is null");
+                    return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error processing metadata at YoutubeConnector at searchVideos retrieving was successful but result is null");
                 }
                 return metadata;
             } catch (Exception e) {

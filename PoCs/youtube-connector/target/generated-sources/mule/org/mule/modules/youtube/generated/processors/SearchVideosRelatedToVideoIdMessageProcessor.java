@@ -1,6 +1,7 @@
 
 package org.mule.modules.youtube.generated.processors;
 
+import com.google.api.services.youtube.model.SearchResultSnippet;
 import java.util.List;
 import javax.annotation.Generated;
 import org.mule.api.MuleEvent;
@@ -32,20 +33,24 @@ import org.mule.security.oauth.callback.ProcessCallback;
 
 
 /**
- * GetUserChannelsMessageProcessor invokes the {@link org.mule.modules.youtube.YoutubeConnector#getUserChannels(java.lang.String)} method in {@link YoutubeConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+ * SearchVideosRelatedToVideoIdMessageProcessor invokes the {@link org.mule.modules.youtube.YoutubeConnector#searchVideosRelatedToVideoId(java.lang.String, java.lang.String, java.lang.String)} method in {@link YoutubeConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-01-18T09:27:01-05:00", comments = "Build UNNAMED.2793.f49b6c7")
-public class GetUserChannelsMessageProcessor
+@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-01-19T08:25:21-05:00", comments = "Build UNNAMED.2793.f49b6c7")
+public class SearchVideosRelatedToVideoIdMessageProcessor
     extends DevkitBasedMessageProcessor
     implements MessageProcessor, OperationMetaDataEnabled
 {
 
-    protected Object access_token;
-    protected String _access_tokenType;
+    protected Object key;
+    protected String _keyType;
+    protected Object relatedToVideoId;
+    protected String _relatedToVideoIdType;
+    protected Object regionCode;
+    protected String _regionCodeType;
 
-    public GetUserChannelsMessageProcessor(String operationName) {
+    public SearchVideosRelatedToVideoIdMessageProcessor(String operationName) {
         super(operationName);
     }
 
@@ -79,12 +84,30 @@ public class GetUserChannelsMessageProcessor
     }
 
     /**
-     * Sets access_token
+     * Sets relatedToVideoId
      * 
      * @param value Value to set
      */
-    public void setAccess_token(Object value) {
-        this.access_token = value;
+    public void setRelatedToVideoId(Object value) {
+        this.relatedToVideoId = value;
+    }
+
+    /**
+     * Sets regionCode
+     * 
+     * @param value Value to set
+     */
+    public void setRegionCode(Object value) {
+        this.regionCode = value;
+    }
+
+    /**
+     * Sets key
+     * 
+     * @param value Value to set
+     */
+    public void setKey(Object value) {
+        this.key = value;
     }
 
     /**
@@ -99,9 +122,12 @@ public class GetUserChannelsMessageProcessor
         Object moduleObject = null;
         try {
             moduleObject = findOrCreate(null, false, event);
-            final String _transformedAccess_token = ((String) evaluateAndTransform(getMuleContext(), event, GetUserChannelsMessageProcessor.class.getDeclaredField("_access_tokenType").getGenericType(), null, access_token));
+            final String _transformedKey = ((String) evaluateAndTransform(getMuleContext(), event, SearchVideosRelatedToVideoIdMessageProcessor.class.getDeclaredField("_keyType").getGenericType(), null, key));
+            final String _transformedRelatedToVideoId = ((String) evaluateAndTransform(getMuleContext(), event, SearchVideosRelatedToVideoIdMessageProcessor.class.getDeclaredField("_relatedToVideoIdType").getGenericType(), null, relatedToVideoId));
+            final String _transformedRegionCode = ((String) evaluateAndTransform(getMuleContext(), event, SearchVideosRelatedToVideoIdMessageProcessor.class.getDeclaredField("_regionCodeType").getGenericType(), null, regionCode));
+            Object resultPayload;
             final ProcessTemplate<Object, Object> processTemplate = ((ProcessAdapter<Object> ) moduleObject).getProcessTemplate();
-            processTemplate.execute(new ProcessCallback<Object,Object>() {
+            resultPayload = processTemplate.execute(new ProcessCallback<Object,Object>() {
 
 
                 public List<Class<? extends Exception>> getManagedExceptions() {
@@ -115,12 +141,12 @@ public class GetUserChannelsMessageProcessor
                 public Object process(Object object)
                     throws Exception
                 {
-                    ((YoutubeConnector) object).getUserChannels(_transformedAccess_token);
-                    return null;
+                    return ((YoutubeConnector) object).searchVideosRelatedToVideoId(_transformedKey, _transformedRelatedToVideoId, _transformedRegionCode);
                 }
 
             }
             , this, event);
+            event.getMessage().setPayload(resultPayload);
             return event;
         } catch (Exception e) {
             throw e;
@@ -134,7 +160,7 @@ public class GetUserChannelsMessageProcessor
 
     @Override
     public Result<MetaData> getOutputMetaData(MetaData inputMetadata) {
-        MetaDataModel metaDataPayload = getPojoOrSimpleModel(void.class);
+        MetaDataModel metaDataPayload = getPojoOrSimpleModel(SearchResultSnippet.class);
         DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey("OUTPUT_METADATA", null);
         metaDataPayload.addProperty(STUDIO7157 .getStructureIdentifierMetaDataModelProperty(keyForStudio, false, false));
         return new DefaultResult<MetaData>(new DefaultMetaData(metaDataPayload));
@@ -159,7 +185,7 @@ public class GetUserChannelsMessageProcessor
                     return metadata;
                 }
                 if (metadata.get() == null) {
-                    return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error processing metadata at YoutubeConnector at getUserChannels retrieving was successful but result is null");
+                    return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error processing metadata at YoutubeConnector at searchVideosRelatedToVideoId retrieving was successful but result is null");
                 }
                 return metadata;
             } catch (Exception e) {
