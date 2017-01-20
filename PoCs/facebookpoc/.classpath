@@ -8,10 +8,9 @@
   <classpathentry kind="con" path="MULE_RUNTIME"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
   <classpathentry kind="var" path="M2_REPO/com/intellij/annotations/12.0/annotations-12.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar"/>
-  <classpathentry kind="var" path="M2_REPO/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/zaubersoftware/commons-mom/2.0/commons-mom-2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/hazelcast/hazelcast/3.1.6/hazelcast-3.1.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-core-asl/1.9.5/jackson-core-asl-1.9.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-mapper-asl/1.9.5/jackson-mapper-asl-1.9.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-client/1.6/jersey-client-1.6.jar"/>
@@ -20,6 +19,7 @@
   <classpathentry kind="var" path="M2_REPO/joda-time/joda-time/1.6/joda-time-1.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jvnet/mimepull/1.4/mimepull-1.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/tools/devkit/mule-devkit-shade/3.7.1/mule-devkit-shade-3.7.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/ralphlauren/mule/modules/mule-module-countdown-latch/2.1.1-RELEASE/mule-module-countdown-latch-2.1.1-RELEASE.jar" sourcepath="M2_REPO/com/ralphlauren/mule/modules/mule-module-countdown-latch/2.1.1-RELEASE/mule-module-countdown-latch-2.1.1-RELEASE-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-facebook/2.3.6-SNAPSHOT/mule-module-facebook-2.3.6-SNAPSHOT.jar" sourcepath="M2_REPO/org/mule/modules/mule-module-facebook/2.3.6-SNAPSHOT/mule-module-facebook-2.3.6-SNAPSHOT-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-objectstore/2.3.0-RELEASE/mule-module-objectstore-2.3.0-RELEASE.jar" sourcepath="M2_REPO/org/mule/modules/mule-module-objectstore/2.3.0-RELEASE/mule-module-objectstore-2.3.0-RELEASE-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-modules-utils/1.0/mule-modules-utils-1.0.jar"/>
