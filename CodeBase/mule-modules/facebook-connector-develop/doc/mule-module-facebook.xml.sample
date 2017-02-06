@@ -1,0 +1,585 @@
+<!-- BEGIN_INCLUDE(facebook:logged-user-details) -->
+<facebook:logged-user-details fields="id" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:logged-user-details) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-posts) -->
+	<facebook:search-posts q="muelsoft" fields="id" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:search-posts) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-users) -->
+	<facebook:search-users q="muelsoft" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:search-users) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-groups) -->
+	<facebook:search-groups q="muelsoft" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:search-groups) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-checkins) -->
+	<facebook:search-checkins config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:search-checkins) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-pages) -->
+	<facebook:search-pages q="muelsoft" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:search-pages) -->
+
+<!-- BEGIN_INCLUDE(facebook:search-events) -->
+	<facebook:search-events q="muelsoft" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:search-events) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-album) -->
+<facebook:get-album album="123456789" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-album) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-album-photos) -->
+<facebook:get-album-photos album="123456789" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-album-photos) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-album-comments) -->
+<facebook:get-album-comments album="123456789" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-album-comments) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-event) -->
+<facebook:get-event eventId="123456789" metadata="O" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-event) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-event-wall) -->
+<facebook:get-event-wall eventId="123456789" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-event-wall) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-event-no-reply) -->
+<facebook:get-event-no-reply eventId="123456789" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-event-no-reply) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-event-maybe) -->
+<facebook:get-event-maybe eventId="123456789" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-event-maybe) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-event-invited) -->
+<facebook:get-event-invited eventId="123456789" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-event-invited) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-event-attending) -->
+<facebook:get-event-attending eventId="123456789" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-event-attending) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-event-declined) -->
+<facebook:get-event-declined eventId="#[map-payload:eventId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-event-declined) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-event-picture) -->
+<facebook:get-event-picture eventId="#[map-payload:eventId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-event-picture) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-group) -->
+<facebook:get-group group="#[map-payload:group]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-group) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-group-wall) -->
+<facebook:get-group-wall group="#[map-payload:group]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-group-wall) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-group-members) -->
+<facebook:get-group-members group="#[map-payload:group]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-group-members) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-group-picture) -->
+<facebook:get-group-picture group="#[map-payload:group]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-group-picture) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-link) -->
+<facebook:get-link link="#[map-payload:link]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-link) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-link-comments) -->
+<facebook:get-link-comments link="#[map-payload:link]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-link-comments) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-note) -->
+<facebook:get-note note="#[map-payload:note]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-note) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-note-comments) -->
+<facebook:get-note-comments note="#[map-payload:note]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-note-comments) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-note-likes) -->
+<facebook:get-note-likes note="#[map-payload:note]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-note-likes) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page) -->
+<facebook:get-page page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-wall) -->
+<facebook:get-page-wall page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-wall) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-picture) -->
+<facebook:get-page-picture page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-picture) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:set-page-picture-from-link) -->
+<facebook:set-page-picture-from-link page="#[map-payload:page]" imageUrl="#[map-payload:imageUrl]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:set-page-picture-from-link) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:set-page-picture-from-source) -->
+<facebook:set-page-picture-from-source page="#[map-payload:page]" source-ref="#[map-payload:imageFile]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:set-page-picture-from-source) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-tagged) -->
+<facebook:get-page-tagged page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-tagged) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-links) -->
+<facebook:get-page-links page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-links) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-photos) -->
+<facebook:get-page-photos page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-photos) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-groups) -->
+ <facebook:get-page-groups page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-groups) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-albums) -->
+<facebook:get-page-albums page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-albums) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-statuses) -->
+<facebook:get-page-statuses page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-statuses) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-statuses) -->
+ <facebook:get-page-statuses page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-statuses) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-videos) -->
+<facebook:get-page-videos page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-videos) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-notes) -->
+<facebook:get-page-notes page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-notes) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-posts) -->
+<facebook:get-page-posts page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-posts) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-events) -->
+<facebook:get-page-events page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-events) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-page-checkins) -->
+<facebook:get-page-checkins page="#[map-payload:page]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-page-checkins) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-photo) -->
+<facebook:get-photo photo="#[map-payload:photo]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-photo) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:tag-photo) -->
+<facebook:tag-photo photoId="#[map-payload:photoId]" to="#[map-payload:userId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:tag-photo) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-photo-tags) -->
+<facebook:get-photo-tags photoId="#[map-payload:photoId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-photo-tags) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-photo-comments) -->
+<facebook:get-photo-comments photo="#[map-payload:photo]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-photo-comments) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-photo-likes) -->
+<facebook:get-photo-likes photo="#[map-payload:photo]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-photo-likes) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-post) -->
+<facebook:get-post post="#[map-payload:post]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-post) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-post-comments) -->
+<facebook:get-post-comments post="#[map-payload:post]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-post-comments) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-status) -->
+<facebook:get-status status="#[map-payload:status]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-status) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-status-comments) -->
+<facebook:get-status-comments status="#[map-payload:status]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-status-comments) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user) -->
+<facebook:get-user user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-search) -->
+<facebook:get-user-search user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-search) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-home) -->
+<facebook:get-user-home user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-home) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-wall) -->
+<facebook:get-user-wall user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-wall) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-tagged) -->
+<facebook:get-user-tagged user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-tagged) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-posts) -->
+<facebook:get-user-posts user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-posts) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-picture) -->
+<facebook:get-user-picture user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-picture) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-friends) -->
+<facebook:get-user-friends user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-friends) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-activities) -->
+<facebook:get-user-activities user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-activities) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-checkins) -->
+<facebook:get-user-checkins user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-checkins) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-interests) -->
+<facebook:get-user-interests user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-interests) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-music) -->
+<facebook:get-user-music user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-music) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-books) -->
+<facebook:get-user-books user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-books) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-movies) -->
+<facebook:get-user-movies user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-movies) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-television) -->
+<facebook:get-user-television user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-television) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-likes) -->
+ <facebook:get-user-likes user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-likes) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-photos) -->
+<facebook:get-user-photos user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-photos) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-photos-uploaded) -->
+<facebook:get-user-photos-uploaded user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-photos-uploaded) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-albums) -->
+<facebook:get-user-albums user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-albums) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-videos) -->
+<facebook:get-user-videos user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-videos) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-videos-uploaded) -->
+<facebook:get-user-videos-uploaded user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-videos-uploaded) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-groups) -->
+<facebook:get-user-groups user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-groups) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-statuses) -->
+<facebook:get-user-statuses user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-statuses) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-links) -->
+<facebook:get-user-links user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-links) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-notes) -->
+<facebook:get-user-notes user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-notes) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-events) -->
+<facebook:get-user-events user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-events) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-inbox) -->
+<facebook:get-user-inbox user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-inbox) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-outbox) -->
+ <facebook:get-user-outbox user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-outbox) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-updates) -->
+<facebook:get-user-updates user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-updates) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-user-accounts) -->
+<facebook:get-user-accounts user="#[map-payload:user]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-user-accounts) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-video) -->
+<facebook:get-video video="#[map-payload:video]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-video) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-video-comments) -->
+<facebook:get-video-comments video="#[map-payload:video]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-video-comments) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:publish-message) -->
+<facebook:publish-message profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:publish-message) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:publish-comment) -->
+<facebook:publish-comment postId="#[map-payload:postId]" msg="#[map-payload:msg]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:publish-comment) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:like) -->
+ <facebook:like postId="#[map-payload:postId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:like) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:publish-note) -->
+<facebook:publish-note profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]"
+                               subject="#[map-payload:subject]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:publish-note) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:publish-link) -->
+<facebook:publish-link profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]"
+                               link="#[map-payload:link]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:publish-link) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:publish-event) -->
+<facebook:publish-event profile_id="#[map-payload:profileId]" event_name="#[map-payload:eventName]" start_time="#[map-payload:startTime]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:publish-event) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:attend-event) -->
+<facebook:attend-event eventId="#[map-payload:eventId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:attend-event) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:tentative-event) -->
+<facebook:tentative-event eventId="#[map-payload:eventId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:tentative-event) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:decline-event) -->
+ <facebook:decline-event eventId="#[map-payload:eventId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:decline-event) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:invite-user) -->
+<facebook:invite-user eventId="#[map-payload:eventId]" userId="#[map-payload:userId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:invite-user) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:uninvite-user) -->
+<facebook:uninvite-user eventId="#[map-payload:eventId]" userId="#[map-payload:userId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:uninvite-user) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:publish-album) -->
+<facebook:publish-album profile_id="#[map-payload:profileId]" msg="#[map-payload:msg]" albumName="#[map-payload:albumName]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:publish-album) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-event-photos) -->
+<facebook:get-event-photos eventId="#[map-payload:eventId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-event-photos) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-event-videos) -->
+<facebook:get-event-videos eventId="#[map-payload:eventId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-event-videos) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:publish-photo) -->
+<facebook:publish-photo albumId="#[map-payload:albumId" caption="#[map-payload:caption]"
+                                photo-ref="#[map-payload:photo]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:publish-photo) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:publish-video) -->
+<facebook:publish-video id="#[map-payload:id]" video-ref="#[map-payload:video]" title="#[map-payload:title]" description="#[map-payload:description]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:publish-video) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:delete-object) -->
+<facebook:delete-object objectId="#[map-payload:objectId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:delete-object) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:dislike) -->
+ <facebook:dislike postId="#[map-payload:postId]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:dislike) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-checkin) -->
+<facebook:get-checkin checkin="#[map-payload:checkin]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-checkin) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application) -->
+<facebook:get-application application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-wall) -->
+<facebook:get-application-wall application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-wall) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-posts) -->
+<facebook:get-application-posts application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-posts) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-picture) -->
+ <facebook:get-application-picture application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-picture) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-tagged) -->
+<facebook:get-application-tagged application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-tagged) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-links) -->
+<facebook:get-application-links application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-links) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-photos) -->
+<facebook:get-application-photos application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-photos) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-albums) -->
+<facebook:get-application-albums application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-albums) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-statuses) -->
+<facebook:get-application-statuses application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-statuses) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-videos) -->
+ <facebook:get-application-videos application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-videos) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-notes) -->
+<facebook:get-application-notes application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-notes) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-events) -->
+<facebook:get-application-events application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-events) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:get-application-insights) -->
+<facebook:get-application-insights application="#[map-payload:application]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:get-application-insights) -->
+
+
+<!-- BEGIN_INCLUDE(facebook:download-image) -->
+	<facebook:download-image imageUri="#[map-payload:imageUri]" config-ref="Facebook"/>
+<!-- END_INCLUDE(facebook:download-image) -->

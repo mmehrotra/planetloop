@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.planetloop.integration</groupId>
+		<artifactId>pl-simple-domain-parent</artifactId>
+		<version>1.0-DEVELOPMENT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>pl-simple-domain-apps</artifactId>
+	<packaging>pom</packaging>
+	<name>Simple Mule Domain Apps Parent POM</name>
+	<description>
+		<![CDATA[Mule applications that need to use shared resources from the Non JTA domain
+should be created and kept here.]]>	
+	</description>
+
+	<modules>
+		<module>facebookpoc</module>		
+	</modules>
+</project>

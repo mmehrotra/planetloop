@@ -1,0 +1,13 @@
+target
+.settings
+.classpath
+.project
+.checkstyle
+.springBeans
+*.iml
+*.ipr
+*.iws
+.idea
+/target
+.studio
+dependency-reduced-pom.xml

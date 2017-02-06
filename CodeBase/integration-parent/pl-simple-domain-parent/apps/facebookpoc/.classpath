@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="**/*.java" kind="src" path="src/main/app"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry excluding="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="M2_REPO/com/intellij/annotations/12.0/annotations-12.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/zaubersoftware/commons-mom/2.0/commons-mom-2.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-core-asl/1.9.5/jackson-core-asl-1.9.5.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-mapper-asl/1.9.5/jackson-mapper-asl-1.9.5.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-client/1.6/jersey-client-1.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-core/1.6/jersey-core-1.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/jersey/contribs/jersey-multipart/1.3/jersey-multipart-1.3.jar"/>
+	<classpathentry kind="var" path="M2_REPO/joda-time/joda-time/1.6/joda-time-1.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/jvnet/mimepull/1.4/mimepull-1.4.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/mule/tools/devkit/mule-devkit-shade/3.7.1/mule-devkit-shade-3.7.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-facebook/2.3.6-SNAPSHOT/mule-module-facebook-2.3.6-SNAPSHOT.jar" sourcepath="M2_REPO/org/mule/modules/mule-module-facebook/2.3.6-SNAPSHOT/mule-module-facebook-2.3.6-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-objectstore/2.3.0-RELEASE/mule-module-objectstore-2.3.0-RELEASE.jar" sourcepath="M2_REPO/org/mule/modules/mule-module-objectstore/2.3.0-RELEASE/mule-module-objectstore-2.3.0-RELEASE-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-modules-utils/1.0/mule-modules-utils-1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/restfb/restfb/1.6.9/restfb-1.6.9.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/staccatocommons/staccatissimo-check/2.0/staccatissimo-check-2.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/staccatocommons/staccatissimo-collections/2.0/staccatissimo-collections-2.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/staccatocommons/staccatissimo-defs/2.0/staccatissimo-defs-2.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/staccatocommons/staccatissimo-iterators/2.0/staccatissimo-iterators-2.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/staccatocommons/staccatissimo-lang/2.0/staccatissimo-lang-2.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/staccatocommons/staccatissimo-restrictions/2.0/staccatissimo-restrictions-2.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/staccatocommons/staccatissimo-util/2.0/staccatissimo-util-2.0.jar"/>
+	<classpathentry exported="true" kind="con" path="MULE_RUNTIME/org.mule.tooling.server.3.7.3.ee"/>
+	<classpathentry kind="src" path="/pl-simple-domain"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
