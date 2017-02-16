@@ -32,5 +32,7 @@
 	<classpathentry kind="var" path="M2_REPO/net/sf/staccatocommons/staccatissimo-util/2.0/staccatissimo-util-2.0.jar"/>
 	<classpathentry exported="true" kind="con" path="MULE_RUNTIME/org.mule.tooling.server.3.7.3.ee"/>
 	<classpathentry kind="src" path="/pl-simple-domain"/>
+	<classpathentry kind="con" path="MULE_LIB/Facebook/org.mule.tooling.ui.contribution.facebook.3.5.0"/>
+	<classpathentry kind="con" path="MULE_LIB/ObjectStore/org.mule.tooling.ui.contribution.objectstore.3.6.0"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
