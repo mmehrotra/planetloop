@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.planetloop.integration</groupId>
+		<artifactId>integration-parent</artifactId>
+		<version>1.0-DEVELOPMENT</version>
+		<relativePath>..</relativePath>
+	</parent>
+	<artifactId>pl-gateway-domain-parent</artifactId>
+	<packaging>pom</packaging>
+	<name>Gatewat Mule Domain Parent POM</name>
+	<description>Parent POM project for Non JTA Mule domain.</description>
+
+	<modules>
+		<module>pl-gateway-domain</module>
+		<module>apps</module>
+	</modules>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

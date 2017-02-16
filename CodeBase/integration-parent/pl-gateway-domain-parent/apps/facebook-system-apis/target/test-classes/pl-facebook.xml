@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore" xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:context="http://www.springframework.org/schema/context" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/current/mule-facebook.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+    <apikit:config name="pl-facebook-config" raml="ramls/pl-facebook.raml" consoleEnabled="false" doc:name="Router"/>
+    <facebook:config-with-oauth name="Facebook__OAuth_v2_0" consumerKey="${facebook.system.api.client.id}" consumerSecret="${facebook.system.api.client.secret}" scope="${facebook.system.api.scope}" doc:name="Facebook: OAuth v2.0">
+        <facebook:oauth-callback-config domain="${facebook.system.api.domain}" localPort="${facebook.system.api.local.port}" remotePort="${facebook.system.api.remote.port}" path="${facebook.system.api.callback.path}"/>
+    </facebook:config-with-oauth>
+    <context:property-placeholder location="file:///${pl.integration.configuration.home}/pl_simple_domain/apps-conf/facebook-system-apis-conf.properties"/>
+    <objectstore:config name="Facebook_ObjectStore_Configuration" doc:name="ObjectStore: Configuration"/>
+    <flow name="pl-facebook-main">
+        <http:listener config-ref="http-lc-0.0.0.0-8081" path="/api/*" doc:name="HTTP"/>
+        <apikit:router config-ref="pl-facebook-config" doc:name="APIkit Router"/>
+        <exception-strategy ref="pl-facebook-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
+    </flow>
+    <flow name="pl-facebook-console">
+        <http:listener config-ref="http-lc-0.0.0.0-8081" path="/console/*" doc:name="HTTP"/>
+        <apikit:console config-ref="pl-facebook-config" doc:name="APIkit Console"/>
+    </flow>
+    <flow name="get:/getRecommnededVideos:application/json:pl-facebook-config">
+        <set-payload value="{&#xA; &quot;userid&quot;: &quot;1234&quot;,&#xA; &quot;videos&quot;: [&#xA;     {&#xA;       &quot;videoId&quot;: &quot;1&quot;,&#xA;       &quot;embedHtml&quot;: &quot;https://www.facebook.com/video/embed?video_id=102421750266921&quot;,&#xA;       &quot;content_category&quot;: &quot;music&quot;,&#xA;       &quot;description&quot;: &quot;Rock concert by beyonce&quot;,&#xA;       &quot;thumb&quot;: &quot;121212&quot;,&#xA;       &quot;title&quot;: &quot;Rock concert by beyonce&quot;,&#xA;       &quot;likeCounts&quot;: &quot;23&quot;,&#xA;       &quot;shareCount&quot;: &quot;12&quot;,&#xA;       &quot;uploadTimestamp&quot;: &quot;20160202121212111&quot;&#xA;     },&#xA;     {&#xA;       &quot;videoId&quot;: &quot;2&quot;,&#xA;       &quot;embedHtml&quot;: &quot;https://www.facebook.com/video/embed?video_id=10242130266921&quot;,&#xA;       &quot;content_category&quot;: &quot;news&quot;,&#xA;       &quot;description&quot;: &quot;Rock concert by beyonce&quot;,&#xA;       &quot;thumb&quot;: &quot;121212&quot;,&#xA;       &quot;title&quot;: &quot;Rock concert by beyonce&quot;,&#xA;       &quot;likeCounts&quot;: &quot;23&quot;,&#xA;       &quot;shareCount&quot;: &quot;12&quot;,&#xA;       &quot;uploadTimestamp&quot;: &quot;20160302121212111&quot;&#xA;     }&#xA;   ]&#xA; }" doc:name="Set Payload"/>
+    </flow>
+    <flow name="get:/userDetails:application/json:pl-facebook-config">
+        <set-payload value="{&#xA;  &quot;date_of_birth&quot;: &quot;19-Nov-1990&quot;,&#xA;  &quot;member_since&quot;: &quot;Jan 2016&quot;,&#xA;  &quot;about_me&quot;: &quot;et eu exercitation&quot;,&#xA;  &quot;display_name&quot;: &quot;tempor dolor&quot;,&#xA;  &quot;last_name&quot;: &quot;nulla veniam&quot;,&#xA;  &quot;address&quot;: [&#xA;      {&#xA;        &quot;city&quot;: &quot;ea pariatur commodo dolor&quot;,&#xA;        &quot;state&quot;: &quot;deserunt&quot;,&#xA;        &quot;country&quot;: &quot;consectetur dolor veniam in dolore&quot;&#xA;      },&#xA;      {&#xA;        &quot;city&quot;: &quot;anim&quot;,&#xA;        &quot;country&quot;: &quot;nostrud cillum adipisicing dolor&quot;&#xA;      }&#xA;  ],&#xA;  &quot;id&quot;: &quot;1234&quot;,&#xA;  &quot;gender&quot;: &quot;male&quot;&#xA;}" doc:name="Set Payload"/>
+    </flow>
+    <flow name="get:/videoUploaded:application/json:pl-facebook-config">
+        <set-payload value="{&#xA; &quot;userid&quot;: &quot;1234&quot;,&#xA; &quot;videos&quot;: [&#xA;     {&#xA;       &quot;videoId&quot;: &quot;1&quot;,&#xA;       &quot;embedHtml&quot;: &quot;https://www.facebook.com/video/embed?video_id=102421750266921&quot;,&#xA;       &quot;content_category&quot;: &quot;music&quot;,&#xA;       &quot;description&quot;: &quot;Rock concert by beyonce&quot;,&#xA;       &quot;thumb&quot;: &quot;121212&quot;,&#xA;       &quot;title&quot;: &quot;Rock concert by beyonce&quot;,&#xA;       &quot;likeCounts&quot;: &quot;23&quot;,&#xA;       &quot;shareCount&quot;: &quot;12&quot;,&#xA;       &quot;uploadTimestamp&quot;: &quot;20160202121212111&quot;&#xA;     },&#xA;     {&#xA;       &quot;videoId&quot;: &quot;2&quot;,&#xA;       &quot;embedHtml&quot;: &quot;https://www.facebook.com/video/embed?video_id=10242130266921&quot;,&#xA;       &quot;content_category&quot;: &quot;news&quot;,&#xA;       &quot;description&quot;: &quot;Rock concert by beyonce&quot;,&#xA;       &quot;thumb&quot;: &quot;121212&quot;,&#xA;       &quot;title&quot;: &quot;Rock concert by beyonce&quot;,&#xA;       &quot;likeCounts&quot;: &quot;23&quot;,&#xA;       &quot;shareCount&quot;: &quot;12&quot;,&#xA;       &quot;uploadTimestamp&quot;: &quot;20160302121212111&quot;&#xA;     }&#xA;   ]&#xA; }" doc:name="Set Payload"/>
+    </flow>
+    <flow name="post:/authorize:application/json:pl-facebook-config">
+        <logger message="Facebook Authorization has been initiated for user id " level="INFO" doc:name="Authorize"/>
+        <json:json-to-object-transformer returnClass="com.planetloop.integration.facebook.vo.User" doc:name="JSON to User Object"/>
+        <set-variable variableName="user" value="#[payload]" doc:name="Setting User"/>
+        <facebook:authorize config-ref="Facebook__OAuth_v2_0" doc:name="Facebook-Authorize"/>
+        <choice doc:name="Is Authorization Successful ?">
+            <when expression="flowVars.OAuthAccessTokenId != null">
+                <logger message="Authorization of the user with user id [#[flowVars.user.id]] is successful" level="INFO" doc:name="Successful Authorization"/>
+                <objectstore:retrieve config-ref="Facebook_ObjectStore_Configuration" key="Facebook" defaultValue-ref="#['NA']" targetProperty="authTokenId" doc:name="Get Auth Token ID"/>
+                <logger message="Auth code for the user with user id  [#[flowVars.user.id]] is [#[flowVars.authTokenId]]" level="INFO" doc:name="Auth Code Storage"/>
+                <objectstore:store config-ref="Facebook_ObjectStore_Configuration" key="#[flowVars.user.id]" value-ref="#[flowVars.authTokenId]" overwrite="true" doc:name="Saving the AuthCode"/>
+                <set-payload value="{   &quot;date_of_birth&quot;: &quot;19-Nov-1990&quot;,   &quot;member_since&quot;: &quot;Jan 2016&quot;,   &quot;about_me&quot;: &quot;et eu exercitation&quot;,   &quot;display_name&quot;: &quot;tempor dolor&quot;,   &quot;last_name&quot;: &quot;nulla veniam&quot;,   &quot;address&quot;: [    {      &quot;city&quot;: &quot;ea pariatur commodo dolor&quot;,      &quot;state&quot;: &quot;deserunt&quot;,      &quot;country&quot;: &quot;consectetur dolor veniam in dolore&quot;    },    {      &quot;city&quot;: &quot;anim&quot;,      &quot;country&quot;: &quot;nostrud cillum adipisicing dolor&quot;    }   ],   &quot;id&quot;: &quot;1234&quot;,   &quot;gender&quot;: &quot;male&quot;,   &quot;is_active&quot;: &quot;true&quot; }" doc:name="Set Success Payload"/>
+            </when>
+            <otherwise>
+                <logger message="Authorization of the user with user id [#[flowVars.user.id]] has failed." level="INFO" doc:name="Unsuccessful Authorization"/>
+                <set-payload value="{
+  &quot;date_of_birth&quot;: &quot;19-Nov-1990&quot;,
+  &quot;member_since&quot;: &quot;Jan 2016&quot;,
+  &quot;about_me&quot;: &quot;et eu exercitation&quot;,
+  &quot;display_name&quot;: &quot;tempor dolor&quot;,
+  &quot;last_name&quot;: &quot;nulla veniam&quot;,
+  &quot;address&quot;: [
+   {
+     &quot;city&quot;: &quot;ea pariatur commodo dolor&quot;,
+     &quot;state&quot;: &quot;deserunt&quot;,
+     &quot;country&quot;: &quot;consectetur dolor veniam in dolore&quot;
+   },
+   {
+     &quot;city&quot;: &quot;anim&quot;,
+     &quot;country&quot;: &quot;nostrud cillum adipisicing dolor&quot;
+   }
+  ],
+  &quot;id&quot;: &quot;1234&quot;,
+  &quot;gender&quot;: &quot;male&quot;,
+  &quot;is_active&quot;: &quot;false&quot;
+}" doc:name="Set Failure Payload"/>
+            </otherwise>
+        </choice>
+
+    </flow>
+    <flow name="post:/postVideo:pl-facebook-config">
+        <set-payload value="#[NullPayload.getInstance()]" doc:name="Set Payload"/>
+    </flow>
+    <flow name="post:/unauthorize:application/json:pl-facebook-config">
+        <set-payload value="{&#xA;  &quot;date_of_birth&quot;: &quot;19-Nov-1990&quot;,&#xA;  &quot;member_since&quot;: &quot;Jan 2016&quot;,&#xA;  &quot;about_me&quot;: &quot;et eu exercitation&quot;,&#xA;  &quot;display_name&quot;: &quot;tempor dolor&quot;,&#xA;  &quot;last_name&quot;: &quot;nulla veniam&quot;,&#xA;  &quot;address&quot;: [&#xA;   {&#xA;     &quot;city&quot;: &quot;ea pariatur commodo dolor&quot;,&#xA;     &quot;state&quot;: &quot;deserunt&quot;,&#xA;     &quot;country&quot;: &quot;consectetur dolor veniam in dolore&quot;&#xA;   },&#xA;   {&#xA;     &quot;city&quot;: &quot;anim&quot;,&#xA;     &quot;country&quot;: &quot;nostrud cillum adipisicing dolor&quot;&#xA;   }&#xA;  ],&#xA;  &quot;id&quot;: &quot;1234&quot;,&#xA;  &quot;gender&quot;: &quot;male&quot;,&#xA;  &quot;is_active&quot;: &quot;false&quot;&#xA;}" doc:name="Set Payload"/>
+    </flow>
+    <apikit:mapping-exception-strategy name="pl-facebook-apiKitGlobalExceptionMapping">
+        <apikit:mapping statusCode="404">
+            <apikit:exception value="org.mule.module.apikit.exception.NotFoundException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Resource not found&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="405">
+            <apikit:exception value="org.mule.module.apikit.exception.MethodNotAllowedException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Method not allowed&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="415">
+            <apikit:exception value="org.mule.module.apikit.exception.UnsupportedMediaTypeException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Unsupported media type&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="406">
+            <apikit:exception value="org.mule.module.apikit.exception.NotAcceptableException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Not acceptable&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+        <apikit:mapping statusCode="400">
+            <apikit:exception value="org.mule.module.apikit.exception.BadRequestException" />
+            <set-property propertyName="Content-Type" value="application/json" doc:name="Property"/>
+            <set-payload value="{ &quot;message&quot;: &quot;Bad request&quot; }" doc:name="Set Payload"/>
+        </apikit:mapping>
+    </apikit:mapping-exception-strategy>
+</mule>

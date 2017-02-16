@@ -1,0 +1,419 @@
+#%RAML 0.8
+title: Planetloop-facebook
+baseUri: http://localhost:8087/planetloop/facebook
+mediaType: application/json
+schemas: 
+  - user-details : | 
+      {
+         "type": "object",
+         "properties": {
+            "id": {
+              "type": "string"
+             },
+            "first_name": {
+              "type": "string"
+             },
+            "last_name": {
+              "type": "string"
+             },
+            "display_name": {
+              "type": "string"
+             },
+            "gender": {
+              "type": "string"
+             },
+            "about_me": {
+              "type": "string"
+             },
+            "date_of_birth": {
+              "type": "string"
+            },
+            "member_since": {
+              "type": "string"
+            },
+            "is_active" : {
+              "type": "string"
+            },
+            "address": {
+              "type": "array",
+              "items": {
+                  "type": "object",
+                  "properties": {
+                     "city": {
+                       "type": "string"
+                      },
+                     "state": {
+                       "type": "string"
+                      },
+                     "country": {
+                       "type": "string"
+                      }
+                  }
+              }
+            }
+          }  
+      }        
+  - get-user-details : |
+      {
+         "$schema": "http://json-schema.org/draft-04/schema#",
+         "type": "object",
+         "properties": {
+            "id": {
+              "type": "string"
+             }
+          }
+       }
+  - get-user-videos : |             
+      {
+         "$schema": "http://json-schema.org/draft-04/schema#",
+         "type": "object",
+         "properties": {
+            "id": {
+              "type": "string"
+             },
+             "startTime": {
+              "type": "string"
+             },
+             "endTime": {
+              "type": "string"
+             }
+          }
+       }
+  - user-videos : |
+      {
+         "$schema": "http://json-schema.org/draft-04/schema#",
+         "type": "object",
+         "properties": {
+           "userid": {
+              "type": "string"
+           },
+           "videos": {
+              "type": "array",
+                "items": {
+                   "type": "object",
+                      "properties": {
+                        "videoId": {
+                           "type": "string"
+                         },
+                        "embedHtml": {
+                          "type": "string"
+                        },
+                        "content_category": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "thumb": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "likeCounts": {
+                           "type": "string"
+                        },
+                        "shareCount": {
+                           "type": "string"
+                        },
+                        "uploadTimestamp": {
+                          "type": "string"
+                        }
+                      }
+                  }
+              }
+          }
+        }
+  - videos : |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {
+             "videos": {
+               "type": "array",
+                    "items": {
+                          "type": "object",
+                          "properties": {
+                              "videoId": {
+                                 "type": "string"
+                              },
+                              "embedHtml": {
+                                 "type": "string"
+                              },
+                              "content_category": {
+                                 "type": "string"
+                              },
+                              "description": {
+                                 "type": "string"
+                              },
+                              "thumb": {
+                                 "type": "string"
+                              },
+                              "title": {
+                                 "type": "string"
+                              },
+                              "likeCounts": {
+                                 "type": "string"
+                              },
+                              "shareCount": {
+                                 "type": "string"
+                              },
+                              "uploadTimestamp": {
+                                 "type": "string"
+                              }
+                            }
+                        }
+                      }
+                    }
+                }      
+            
+/userDetails:
+  displayName: getUserDetails
+  get:
+    description: This will give the details of the user who has logged into the system and we are having the token for the same
+    body: 
+      application/json:
+        schema: get-user-details
+        example: |
+          {
+            "id": "1234"
+          }
+    responses: 
+      200:
+        description: User details
+        body: 
+          application/json:
+            schema: user-details
+            example: |
+              {
+                "date_of_birth": "19-Nov-1990",
+                "member_since": "Jan 2016",
+                "about_me": "et eu exercitation",
+                "display_name": "tempor dolor",
+                "last_name": "nulla veniam",
+                "address": [
+                    {
+                      "city": "ea pariatur commodo dolor",
+                      "state": "deserunt",
+                      "country": "consectetur dolor veniam in dolore"
+                    },
+                    {
+                      "city": "anim",
+                      "country": "nostrud cillum adipisicing dolor"
+                    }
+                ],
+                "id": "1234",
+                "gender": "male"
+              }
+/videoUploaded:
+   displayName: videoUploaded
+   get:
+     description: This will list out the vidoes uploaded by the user
+     body: 
+       application/json:
+         schema: get-user-videos
+         example: |
+           {
+              "id" : "1234",
+              "startTime": "20160101000000",
+              "endTime": "20160303000000"
+            }
+     responses: 
+       200:
+         body: 
+           application/json:
+             schema: get-user-videos
+             example: |
+               {
+                "userid": "1234",
+                "videos": [
+                    {
+                      "videoId": "1",
+                      "embedHtml": "https://www.facebook.com/video/embed?video_id=102421750266921",
+                      "content_category": "music",
+                      "description": "Rock concert by beyonce",
+                      "thumb": "121212",
+                      "title": "Rock concert by beyonce",
+                      "likeCounts": "23",
+                      "shareCount": "12",
+                      "uploadTimestamp": "20160202121212111"
+                    },
+                    {
+                      "videoId": "2",
+                      "embedHtml": "https://www.facebook.com/video/embed?video_id=10242130266921",
+                      "content_category": "news",
+                      "description": "Rock concert by beyonce",
+                      "thumb": "121212",
+                      "title": "Rock concert by beyonce",
+                      "likeCounts": "23",
+                      "shareCount": "12",
+                      "uploadTimestamp": "20160302121212111"
+                    }
+                  ]
+                }                
+/postVideo:
+   displayName: postVideo
+   post:
+      description: This method will enable us to post videos on facebook
+/getRecommnededVideos:
+   displayName: getRecommendedVideos
+   get:
+      description: This method will enable us to get the recommneded videos based on user's interrests
+      body: 
+        application/json:
+          schema: get-user-videos
+          example: |
+           {
+              "id" : "1234",
+              "startTime": "20160101000000",
+              "endTime": "20160303000000"
+            }
+      responses: 
+       200:
+         body: 
+           application/json:
+             schema: get-user-videos
+             example: |
+               {
+                "userid": "1234",
+                "videos": [
+                    {
+                      "videoId": "1",
+                      "embedHtml": "https://www.facebook.com/video/embed?video_id=102421750266921",
+                      "content_category": "music",
+                      "description": "Rock concert by beyonce",
+                      "thumb": "121212",
+                      "title": "Rock concert by beyonce",
+                      "likeCounts": "23",
+                      "shareCount": "12",
+                      "uploadTimestamp": "20160202121212111"
+                    },
+                    {
+                      "videoId": "2",
+                      "embedHtml": "https://www.facebook.com/video/embed?video_id=10242130266921",
+                      "content_category": "news",
+                      "description": "Rock concert by beyonce",
+                      "thumb": "121212",
+                      "title": "Rock concert by beyonce",
+                      "likeCounts": "23",
+                      "shareCount": "12",
+                      "uploadTimestamp": "20160302121212111"
+                    }
+                  ]
+                } 
+/authorize:
+   displayName: authorize
+   post:
+      description: This method will authorize the users to third parties
+      body: 
+        application/json:
+          schema: user-details
+          example: |
+            {
+                "date_of_birth": "19-Nov-1990",
+                "member_since": "Jan 2016",
+                "about_me": "et eu exercitation",
+                "display_name": "tempor dolor",
+                "last_name": "nulla veniam",
+                "address": [
+                    {
+                      "city": "ea pariatur commodo dolor",
+                      "state": "deserunt",
+                      "country": "consectetur dolor veniam in dolore"
+                    },
+                    {
+                      "city": "anim",
+                      "country": "nostrud cillum adipisicing dolor"
+                    }
+                ],
+                "id": "1234",
+                "gender": "male",
+                "is_active": "false"
+              }
+      responses: 
+          200:
+            description: Response will have the is_active flag
+            body: 
+              application/json:
+                schema: user-details
+                example: |
+                  {
+                    "date_of_birth": "19-Nov-1990",
+                    "member_since": "Jan 2016",
+                    "about_me": "et eu exercitation",
+                    "display_name": "tempor dolor",
+                    "last_name": "nulla veniam",
+                    "address": [
+                     {
+                       "city": "ea pariatur commodo dolor",
+                       "state": "deserunt",
+                       "country": "consectetur dolor veniam in dolore"
+                     },
+                     {
+                       "city": "anim",
+                       "country": "nostrud cillum adipisicing dolor"
+                     }
+                    ],
+                    "id": "1234",
+                    "gender": "male",
+                    "is_active": "true"
+                  }
+/unauthorize:
+   displayName: unauthorize
+   post:
+      description: this method will unauthorize the users to third parties 
+      body: 
+        application/json:
+          schema: user-details
+          example: |
+            {
+                "date_of_birth": "19-Nov-1990",
+                "member_since": "Jan 2016",
+                "about_me": "et eu exercitation",
+                "display_name": "tempor dolor",
+                "last_name": "nulla veniam",
+                "address": [
+                    {
+                      "city": "ea pariatur commodo dolor",
+                      "state": "deserunt",
+                      "country": "consectetur dolor veniam in dolore"
+                    },
+                    {
+                      "city": "anim",
+                      "country": "nostrud cillum adipisicing dolor"
+                    }
+                ],
+                "id": "1234",
+                "gender": "male",
+                "is_active": "true"
+              }
+      responses: 
+          200:
+            description: Response will have the is_active flag
+            body: 
+              application/json:
+                schema: user-details
+                example: |
+                  {
+                    "date_of_birth": "19-Nov-1990",
+                    "member_since": "Jan 2016",
+                    "about_me": "et eu exercitation",
+                    "display_name": "tempor dolor",
+                    "last_name": "nulla veniam",
+                    "address": [
+                     {
+                       "city": "ea pariatur commodo dolor",
+                       "state": "deserunt",
+                       "country": "consectetur dolor veniam in dolore"
+                     },
+                     {
+                       "city": "anim",
+                       "country": "nostrud cillum adipisicing dolor"
+                     }
+                    ],
+                    "id": "1234",
+                    "gender": "male",
+                    "is_active": "false"
+                  } 
+      
+              
