@@ -1,5 +1,5 @@
 #%RAML 0.8
-title: Planetloop-facebook
+title: Planetloop-facebook-system-apis
 baseUri: http://localhost:8087/integration/facebook
 mediaType: application/json
 schemas: 
@@ -10,28 +10,28 @@ schemas:
             "id": {
               "type": "string"
              },
-            "first_name": {
+            "firstName": {
               "type": "string"
              },
-            "last_name": {
+            "lastName": {
               "type": "string"
              },
-            "display_name": {
+            "displayName": {
               "type": "string"
              },
             "gender": {
               "type": "string"
              },
-            "about_me": {
+            "aboutMe": {
               "type": "string"
              },
-            "date_of_birth": {
+            "dateOfBirth": {
               "type": "string"
             },
-            "member_since": {
+            "memberSince": {
               "type": "string"
             },
-            "is_active" : {
+            "isActive" : {
               "type": "string"
             },
             "address": {
@@ -167,7 +167,7 @@ schemas:
                     }
                 }      
             
-/userDetails:
+/user:
   displayName: getUserDetails
   get:
     description: This will give the details of the user who has logged into the system and we are having the token for the same
@@ -186,11 +186,11 @@ schemas:
             schema: user-details
             example: |
               {
-                "date_of_birth": "19-Nov-1990",
-                "member_since": "Jan 2016",
-                "about_me": "et eu exercitation",
-                "display_name": "tempor dolor",
-                "last_name": "nulla veniam",
+                "dateOfBirth": "19-Nov-1990",
+                "memberSince": "Jan 2016",
+                "aboutMe": "et eu exercitation",
+                "displayName": "tempor dolor",
+                "lastName": "nulla veniam",
                 "address": [
                     {
                       "city": "ea pariatur commodo dolor",
@@ -205,8 +205,8 @@ schemas:
                 "id": "1234",
                 "gender": "male"
               }
-/videoUploaded:
-   displayName: videoUploaded
+/uploadedVideos:
+   displayName: uploadedVideos
    get:
      description: This will list out the vidoes uploaded by the user
      body: 
@@ -255,8 +255,8 @@ schemas:
    displayName: postVideo
    post:
       description: This method will enable us to post videos on facebook
-/getRecommnededVideos:
-   displayName: getRecommendedVideos
+/recommnededVideos:
+   displayName: recommendedVideos
    get:
       description: This method will enable us to get the recommneded videos based on user's interrests
       body: 
@@ -310,11 +310,11 @@ schemas:
           schema: user-details
           example: |
             {
-                "date_of_birth": "19-Nov-1990",
-                "member_since": "Jan 2016",
-                "about_me": "et eu exercitation",
-                "display_name": "tempor dolor",
-                "last_name": "nulla veniam",
+                "dateOfBirth": "19-Nov-1990",
+                "memberSince": "Jan 2016",
+                "aboutMe": "et eu exercitation",
+                "displayName": "tempor dolor",
+                "lastName": "nulla veniam",
                 "address": [
                     {
                       "city": "ea pariatur commodo dolor",
@@ -328,7 +328,7 @@ schemas:
                 ],
                 "id": "1234",
                 "gender": "male",
-                "is_active": "false"
+                "isActive": "false"
               }
       responses: 
           200:
@@ -338,11 +338,11 @@ schemas:
                 schema: user-details
                 example: |
                   {
-                    "date_of_birth": "19-Nov-1990",
-                    "member_since": "Jan 2016",
-                    "about_me": "et eu exercitation",
-                    "display_name": "tempor dolor",
-                    "last_name": "nulla veniam",
+                    "dateOfBirth": "19-Nov-1990",
+                    "memberSince": "Jan 2016",
+                    "aboutMe": "et eu exercitation",
+                    "displayName": "tempor dolor",
+                    "lastName": "nulla veniam",
                     "address": [
                      {
                        "city": "ea pariatur commodo dolor",
@@ -356,7 +356,7 @@ schemas:
                     ],
                     "id": "1234",
                     "gender": "male",
-                    "is_active": "true"
+                    "isActive": "true"
                   }
 /unauthorize:
    displayName: unauthorize
@@ -367,11 +367,11 @@ schemas:
           schema: user-details
           example: |
             {
-                "date_of_birth": "19-Nov-1990",
-                "member_since": "Jan 2016",
-                "about_me": "et eu exercitation",
-                "display_name": "tempor dolor",
-                "last_name": "nulla veniam",
+                "dateOfBirth": "19-Nov-1990",
+                "memberSince": "Jan 2016",
+                "aboutMe": "et eu exercitation",
+                "displayName": "tempor dolor",
+                "lastName": "nulla veniam",
                 "address": [
                     {
                       "city": "ea pariatur commodo dolor",
@@ -385,7 +385,7 @@ schemas:
                 ],
                 "id": "1234",
                 "gender": "male",
-                "is_active": "true"
+                "isActive": "true"
               }
       responses: 
           200:
@@ -395,11 +395,11 @@ schemas:
                 schema: user-details
                 example: |
                   {
-                    "date_of_birth": "19-Nov-1990",
-                    "member_since": "Jan 2016",
-                    "about_me": "et eu exercitation",
-                    "display_name": "tempor dolor",
-                    "last_name": "nulla veniam",
+                    "dateOfBirth": "19-Nov-1990",
+                    "memberSince": "Jan 2016",
+                    "aboutMe": "et eu exercitation",
+                    "displayName": "tempor dolor",
+                    "lastName": "nulla veniam",
                     "address": [
                      {
                        "city": "ea pariatur commodo dolor",
@@ -413,7 +413,7 @@ schemas:
                     ],
                     "id": "1234",
                     "gender": "male",
-                    "is_active": "false"
+                    "isActive": "false"
                   } 
       
               

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain:mule-domain xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:wmq="http://www.mulesoft.org/schema/mule/ee/wmq" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:domain="http://www.mulesoft.org/schema/mule/ee/domain"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:secure-property-placeholder="http://www.mulesoft.org/schema/mule/secure-property-placeholder"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/domain http://www.mulesoft.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/ee/wmq/current/mule-wmq-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-property-placeholder 
+http://www.mulesoft.org/schema/mule/secure-property-placeholder/current/mule-secure-property-placeholder.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/domain http://www.mulesoft.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+
+
+	<context:property-placeholder
+		location="file:///${pl.integration.configuration.home}/pl_gateway_domain/domain-conf.properties" />
+
+
+	<!-- HTTP Listener Configurations -->
+	<http:listener-config name="GatewayDomainHttpListenerConfiguration"
+		host="${http.listener.host}" port="${http.listener.port}" basePath="${http.listener.base.uri}"
+		doc:name="HTTP Listener Configuration" connectionIdleTimeout="${http.listener.connection.idle.timeout}"
+		doc:description="Common HTTP listener configuration for all mule modules that are to be depoyed on the Gateway Domain">
+	</http:listener-config>
+
+	<!-- <http:listener-config name="http-lc-0.0.0.0-8081" host="0.0.0.0" port="8081" 
+		protocol="HTTP"/> -->
+
+	<!-- <http:listener-config name="https-lc-0.0.0.0-8082" host="0.0.0.0" port="8082" 
+		protocol="HTTPS"> <tls:context name="tls-context-config"> <tls:key-store 
+		path="[replace_with_path_to_keystore_file]" password="[replace_with_store_password]" 
+		keyPassword="[replace_with_key_password]"/> </tls:context> </http:listener-config> -->
+
+</domain:mule-domain>

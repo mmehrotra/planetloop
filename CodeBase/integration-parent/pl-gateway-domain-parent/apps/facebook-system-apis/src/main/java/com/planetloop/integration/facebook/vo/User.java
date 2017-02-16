@@ -3,35 +3,39 @@ package com.planetloop.integration.facebook.vo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "id", "first_name", "last_name", "display_name", "gender", "about_me", "date_of_birth",
-		"member_since", "is_active", "address" })
-public class User {
+/*@JsonInclude(JsonInclude.Include.NON_NULL)*/
+/*@JsonPropertyOrder({ "id", "first_name", "last_name", "display_name", "gender", "about_me", "date_of_birth",
+		"member_since", "is_active", "address" })*/
+@JsonAutoDetect
+public class User{
 
 	@JsonProperty("id")
 	private String id;
-	@JsonProperty("first_name")
+	@JsonProperty("firstName")
 	private String firstName;
-	@JsonProperty("last_name")
+	@JsonProperty("lastName")
 	private String lastName;
-	@JsonProperty("display_name")
+	@JsonProperty("displayName")
 	private String displayName;
 	@JsonProperty("gender")
 	private String gender;
-	@JsonProperty("about_me")
+	@JsonProperty("aboutMe")
 	private String aboutMe;
-	@JsonProperty("date_of_birth")
+	@JsonProperty("dateOfBirth")
 	private String dateOfBirth;
-	@JsonProperty("member_since")
+	@JsonProperty("memberSince")
 	private String memberSince;
-	@JsonProperty("is_active")
+	@JsonProperty("isActive")
 	private String isActive;
 	@JsonProperty("address")
 	private List<Address> address = null;
@@ -48,32 +52,32 @@ public class User {
 		this.id = id;
 	}
 
-	@JsonProperty("first_name")
+	@JsonProperty("firstName")
 	public String getFirstName() {
 		return firstName;
 	}
 
-	@JsonProperty("first_name")
+	@JsonProperty("firstName")
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	@JsonProperty("last_name")
+	@JsonProperty("lastName")
 	public String getLastName() {
 		return lastName;
 	}
 
-	@JsonProperty("last_name")
+	@JsonProperty("lastName")
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	@JsonProperty("display_name")
+	@JsonProperty("displayName")
 	public String getDisplayName() {
 		return displayName;
 	}
 
-	@JsonProperty("display_name")
+	@JsonProperty("displayName")
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
@@ -88,42 +92,44 @@ public class User {
 		this.gender = gender;
 	}
 
-	@JsonProperty("about_me")
+	@JsonProperty("aboutMe")
 	public String getAboutMe() {
 		return aboutMe;
 	}
 
-	@JsonProperty("about_me")
+	@JsonProperty("aboutMe")
 	public void setAboutMe(String aboutMe) {
 		this.aboutMe = aboutMe;
 	}
 
-	@JsonProperty("date_of_birth")
+	@JsonProperty("dateOfBirth")
+	@JsonGetter("dateOfBirth")
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	@JsonProperty("date_of_birth")
+	@JsonProperty("dateOfBirth")
+	@JsonSetter("dateOfBirth")
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	@JsonProperty("member_since")
+	@JsonProperty("memberSince")
 	public String getMemberSince() {
 		return memberSince;
 	}
 
-	@JsonProperty("member_since")
+	@JsonProperty("memberSince")
 	public void setMemberSince(String memberSince) {
 		this.memberSince = memberSince;
 	}
 
-	@JsonProperty("is_active")
+	@JsonProperty("isActive")
 	public String getIsActive() {
 		return isActive;
 	}
 
-	@JsonProperty("is_active")
+	@JsonProperty("isActive")
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
