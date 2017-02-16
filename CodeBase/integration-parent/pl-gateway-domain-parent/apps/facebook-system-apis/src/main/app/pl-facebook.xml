@@ -15,12 +15,12 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
     <context:property-placeholder location="file:///${pl.integration.configuration.home}/pl_simple_domain/apps-conf/facebook-system-apis-conf.properties"/>
     <objectstore:config name="Facebook_ObjectStore_Configuration" doc:name="ObjectStore: Configuration"/>
     <flow name="pl-facebook-main">
-        <http:listener config-ref="http-lc-0.0.0.0-8081" path="/api/*" doc:name="HTTP"/>
+        <http:listener config-ref="GatewayDomainHttpListenerConfiguration" path="/api/*" doc:name="HTTP"/>
         <apikit:router config-ref="pl-facebook-config" doc:name="APIkit Router"/>
         <exception-strategy ref="pl-facebook-apiKitGlobalExceptionMapping" doc:name="Reference Exception Strategy"/>
     </flow>
     <flow name="pl-facebook-console">
-        <http:listener config-ref="http-lc-0.0.0.0-8081" path="/console/*" doc:name="HTTP"/>
+        <http:listener config-ref="GatewayDomainHttpListenerConfiguration" path="/console/*" doc:name="HTTP"/>
         <apikit:console config-ref="pl-facebook-config" doc:name="APIkit Console"/>
     </flow>
     <flow name="get:/getRecommnededVideos:application/json:pl-facebook-config">

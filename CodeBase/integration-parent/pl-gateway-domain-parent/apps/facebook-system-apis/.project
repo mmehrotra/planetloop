@@ -1,6 +1,7 @@
 <projectDescription>
   <name>facebook-system-apis</name>
-  <comment/>
+  <comment>Mule applications that need to use shared resources from the Non JTA domain
+should be created and kept here.</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

@@ -150,6 +150,15 @@
             <version>${mule.version}</version>
             <scope>provided</scope>
         </dependency>
+    
+    
+    <dependency>
+            <groupId>com.planetloop.integration</groupId>
+            <artifactId>gateway-domain</artifactId>
+            <version>1.0-DEVELOPMENT</version>
+            <scope>test</scope>
+            <type>zip</type>
+        </dependency>
     </dependencies>
 
 	<repositories>

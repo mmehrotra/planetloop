@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc"
+	xmlns:facebook="http://www.mulesoft.org/schema/mule/facebook" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/facebook http://www.mulesoft.org/schema/mule/facebook/current/mule-facebook.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd">
+    <facebook:config-with-oauth name="Facebook" consumerKey="229148647510486" consumerSecret="c57478a97a27bc9c2bb14d4e12d1a941" scope="email,user_about_me,user_photos,user_friends,user_actions.video,user_birthday" doc:name="Facebook"> 
+        <facebook:oauth-callback-config domain="localhost" localPort="8088" remotePort="8088" path="authorize/callback/"></facebook:oauth-callback-config>  
+    </facebook:config-with-oauth>
+    <http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8087" doc:name="HTTP Listener Configuration"></http:listener-config>
+    <objectstore:config name="Facebook_ObjectStore_Configuration" doc:name="ObjectStore: Configuration"/>
+    <flow name="facebookpocFlow"> 
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/authorize" doc:name="HTTP"></http:listener>  
+        <logger message="Facebook section has been initiated" level="INFO" doc:name="Logger"></logger>  
+        
+       <!--  <facebook:oauth-save-access-token> 
+            <jdbc-ee:outbound-endpoint exchange-pattern="request-response" queryKey="INSERT_TOKEN" responseTimeout="10000" mimeType="text/plain" queryTimeout="-1" transformer-refs="FacebookTransformer" connector-ref="FACEBOOK_TOKEN"> 
+                <jdbc-ee:query key="INSERT_TOKEN" value="insert into facebook values('1',#[bean:token],#[bean:secret]);"></jdbc-ee:query>  
+            </jdbc-ee:outbound-endpoint>  
+        </facebook:oauth-save-access-token> -->  
+        
+        <facebook:authorize config-ref="Facebook" doc:name="Facebook"></facebook:authorize>  
+        <choice doc:name="Choice"> 
+            <when expression="flowVars.OAuthAccessTokenId != null"> 
+                <logger message="OAuthAccessTokenId is --------- #[flowVars.OAuthAccessTokenId]  PAYLOAD #[payload] #[flowVars] #[message]" level="INFO" doc:name="Logger"></logger>
+                <objectstore:retrieve config-ref="Facebook_ObjectStore_Configuration" key="Facebook" defaultValue-ref="#['NA']" targetProperty="authTokenId" doc:name="ObjectStore"/>
+                <logger message="AAAAAAAAAAAAa   -  #[flowVars.authTokenId.getAccessToken()]           " level="INFO" doc:name="Logger"/>  
+                <facebook:logged-user-details config-ref="Facebook" doc:name="Facebook" fields="id,first_name"></facebook:logged-user-details>  
+                <logger message="Got Here 1 : #[payload]" level="INFO" doc:name="Logger"></logger>  
+                <facebook:get-user-videos-uploaded config-ref="Facebook" doc:name="Facebook" accessTokenId="#[flowVars.OAuthAccessTokenId]" until="now" user="me" fields="id,embed_html"></facebook:get-user-videos-uploaded>  
+                <logger message="Got Here 2 : #[payload]   - ---- AAAAAAAAAAAAAAAA    #[flowVars.access_token]   #[message.inboundProperties]" level="INFO" doc:name="Logger"></logger>
+                <facebook:get-video config-ref="Facebook" video="102421750266921" doc:name="Facebook" fields="id,embed_html"/>
+                <logger message="Got here 3 #[payload]" level="INFO" doc:name="Logger"/>  
+                <set-payload value="#[payload.embedHtml]" doc:name="Set Payload"></set-payload>  
+            </when>  
+            <otherwise> 
+                <logger message="Authorization Unsuccessful" level="INFO" doc:name="Logger"></logger>  
+                <set-payload value="Authorization Failed." doc:name="Set Payload"></set-payload>  
+            </otherwise>  
+        </choice>  
+    </flow>
+
+
+	<!-- <flow name="AutorizeFacebook" >
+		<http:inbound-endpoint exchange-pattern="request-response"
+			host="localhost" port="5555" doc:name="HTTP" path="facebookupdate" />
+		<facebook:authorize config-ref="Facebook" doc:name="Authorize" />
+		<choice doc:name="Choice">
+			<when expression="flowVars.OAuthAccessTokenId != null">
+				<logger message="Authorization Successful" level="INFO"
+					doc:name="Logger" />
+				<set-payload value="Facebook Authorization Successful"
+					doc:name="Set Payload" />
+			</when>
+			<otherwise>
+				<logger message="Authorization Failed" level="INFO" doc:name="Logger" />
+				<set-payload value="Facebook Authorization Failed"
+					doc:name="Set Payload" />
+			</otherwise>
+		</choice>
+	</flow> -->
+
+</mule>

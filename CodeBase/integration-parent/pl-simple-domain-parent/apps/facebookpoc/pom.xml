@@ -82,6 +82,13 @@
             <artifactId>mule-module-objectstore</artifactId>
             <version>2.3.0-RELEASE</version>
     </dependency>
+    <dependency>
+            <groupId>com.planetloop.integration</groupId>
+            <artifactId>simple-domain</artifactId>
+            <version>1.0-DEVELOPMENT</version>
+            <scope>test</scope>
+            <type>zip</type>
+        </dependency>
     </dependencies>
 	<build>
 		<plugins>
