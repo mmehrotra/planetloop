@@ -358,6 +358,61 @@ schemas:
                     "gender": "male",
                     "isActive": "true"
                   }
+   get:
+      description: This method will authorize the users to third parties
+      body: 
+        application/json:
+          schema: user-details
+          example: |
+            {
+                "dateOfBirth": "19-Nov-1990",
+                "memberSince": "Jan 2016",
+                "aboutMe": "et eu exercitation",
+                "displayName": "tempor dolor",
+                "lastName": "nulla veniam",
+                "address": [
+                    {
+                      "city": "ea pariatur commodo dolor",
+                      "state": "deserunt",
+                      "country": "consectetur dolor veniam in dolore"
+                    },
+                    {
+                      "city": "anim",
+                      "country": "nostrud cillum adipisicing dolor"
+                    }
+                ],
+                "id": "1234",
+                "gender": "male",
+                "isActive": "false"
+              }
+      responses: 
+          200:
+            description: Response will have the is_active flag
+            body: 
+              application/json:
+                schema: user-details
+                example: |
+                  {
+                    "dateOfBirth": "19-Nov-1990",
+                    "memberSince": "Jan 2016",
+                    "aboutMe": "et eu exercitation",
+                    "displayName": "tempor dolor",
+                    "lastName": "nulla veniam",
+                    "address": [
+                     {
+                       "city": "ea pariatur commodo dolor",
+                       "state": "deserunt",
+                       "country": "consectetur dolor veniam in dolore"
+                     },
+                     {
+                       "city": "anim",
+                       "country": "nostrud cillum adipisicing dolor"
+                     }
+                    ],
+                    "id": "1234",
+                    "gender": "male",
+                    "isActive": "true"
+                  }
 /unauthorize:
    displayName: unauthorize
    post:

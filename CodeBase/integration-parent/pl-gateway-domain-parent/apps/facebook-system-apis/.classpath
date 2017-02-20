@@ -24,11 +24,13 @@
   <classpathentry kind="var" path="M2_REPO/com/googlecode/libphonenumber/libphonenumber/6.2/libphonenumber-6.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jvnet/mimepull/1.4/mimepull-1.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mongodb/mongo-java-driver/2.11.4/mongo-java-driver-2.11.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/tools/devkit/mule-devkit-shade/3.7.1/mule-devkit-shade-3.7.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-apikit/1.7.4/mule-module-apikit-1.7.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-apikit-spi/1.7.4/mule-module-apikit-spi-1.7.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-cors/2.1.1/mule-module-cors-2.1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-facebook/2.3.6-SNAPSHOT/mule-module-facebook-2.3.6-SNAPSHOT.jar" sourcepath="M2_REPO/org/mule/modules/mule-module-facebook/2.3.6-SNAPSHOT/mule-module-facebook-2.3.6-SNAPSHOT-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-mongo/3.6.1/mule-module-mongo-3.6.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-objectstore/2.3.0-RELEASE/mule-module-objectstore-2.3.0-RELEASE.jar" sourcepath="M2_REPO/org/mule/modules/mule-module-objectstore/2.3.0-RELEASE/mule-module-objectstore-2.3.0-RELEASE-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-modules-utils/1.0/mule-modules-utils-1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/raml/raml-parser/0.8.12/raml-parser-0.8.12.jar"/>

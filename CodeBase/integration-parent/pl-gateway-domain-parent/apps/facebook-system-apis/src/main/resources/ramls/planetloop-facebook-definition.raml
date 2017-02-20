@@ -53,32 +53,6 @@ schemas:
             }
           }  
       }        
-  - get-user-details : |
-      {
-         "$schema": "http://json-schema.org/draft-04/schema#",
-         "type": "object",
-         "properties": {
-            "id": {
-              "type": "string"
-             }
-          }
-       }
-  - get-user-videos : |             
-      {
-         "$schema": "http://json-schema.org/draft-04/schema#",
-         "type": "object",
-         "properties": {
-            "id": {
-              "type": "string"
-             },
-             "startTime": {
-              "type": "string"
-             },
-             "endTime": {
-              "type": "string"
-             }
-          }
-       }
   - user-videos : |
       {
          "$schema": "http://json-schema.org/draft-04/schema#",
@@ -168,16 +142,14 @@ schemas:
                 }      
             
 /user:
-  displayName: getUserDetails
+  displayName: userDetails
   get:
     description: This will give the details of the user who has logged into the system and we are having the token for the same
-    body: 
-      application/json:
-        schema: get-user-details
-        example: |
-          {
-            "id": "1234"
-          }
+    queryParameters: 
+      userId:
+        type: string
+        required: true
+        example: 123
     responses: 
       200:
         description: User details
@@ -205,24 +177,83 @@ schemas:
                 "id": "1234",
                 "gender": "male"
               }
+  post:
+    description: api for creating the user into the system
+    body: 
+      application/json:
+        schema: user-details
+        example: |
+              {
+                "dateOfBirth": "19-Nov-1990",
+                "memberSince": "Jan 2016",
+                "aboutMe": "et eu exercitation",
+                "displayName": "tempor dolor",
+                "lastName": "nulla veniam",
+                "address": [
+                    {
+                      "city": "ea pariatur commodo dolor",
+                      "state": "deserunt",
+                      "country": "consectetur dolor veniam in dolore"
+                    },
+                    {
+                      "city": "anim",
+                      "country": "nostrud cillum adipisicing dolor"
+                    }
+                ],
+                "id": "1234",
+                "gender": "male"
+              }
+    responses: 
+        200:
+         description: User details
+         body: 
+          application/json:
+            schema: user-details
+            example: |
+              {
+                "dateOfBirth": "19-Nov-1990",
+                "memberSince": "Jan 2016",
+                "aboutMe": "et eu exercitation",
+                "displayName": "tempor dolor",
+                "lastName": "nulla veniam",
+                "address": [
+                    {
+                      "city": "ea pariatur commodo dolor",
+                      "state": "deserunt",
+                      "country": "consectetur dolor veniam in dolore"
+                    },
+                    {
+                      "city": "anim",
+                      "country": "nostrud cillum adipisicing dolor"
+                    }
+                ],
+                "id": "1234",
+                "gender": "male"
+              } 
+           
+          
+              
 /uploadedVideos:
    displayName: uploadedVideos
    get:
      description: This will list out the vidoes uploaded by the user
-     body: 
-       application/json:
-         schema: get-user-videos
-         example: |
-           {
-              "id" : "1234",
-              "startTime": "20160101000000",
-              "endTime": "20160303000000"
-            }
+     queryParameters: 
+       userId:
+        type: string
+        required: true
+       startTime:
+         type: string
+         required: true
+         example: 20160101120000
+       endTime:
+         type: string
+         required: true
+         example: 20160101120000       
      responses: 
        200:
          body: 
            application/json:
-             schema: get-user-videos
+             schema: user-videos
              example: |
                {
                 "userid": "1234",
@@ -259,20 +290,17 @@ schemas:
    displayName: recommendedVideos
    get:
       description: This method will enable us to get the recommneded videos based on user's interrests
-      body: 
-        application/json:
-          schema: get-user-videos
-          example: |
-           {
-              "id" : "1234",
-              "startTime": "20160101000000",
-              "endTime": "20160303000000"
-            }
+      queryParameters: 
+        userId:
+          type: string
+          description: user id of the user whose recommended videso needs to be extracted
+          required: true
+          example: 123
       responses: 
        200:
          body: 
            application/json:
-             schema: get-user-videos
+             schema: user-videos
              example: |
                {
                 "userid": "1234",
@@ -303,89 +331,13 @@ schemas:
                 } 
 /authorize:
    displayName: authorize
-   post:
-      description: This method will authorize the users to third parties
-      body: 
-        application/json:
-          schema: user-details
-          example: |
-            {
-                "dateOfBirth": "19-Nov-1990",
-                "memberSince": "Jan 2016",
-                "aboutMe": "et eu exercitation",
-                "displayName": "tempor dolor",
-                "lastName": "nulla veniam",
-                "address": [
-                    {
-                      "city": "ea pariatur commodo dolor",
-                      "state": "deserunt",
-                      "country": "consectetur dolor veniam in dolore"
-                    },
-                    {
-                      "city": "anim",
-                      "country": "nostrud cillum adipisicing dolor"
-                    }
-                ],
-                "id": "1234",
-                "gender": "male",
-                "isActive": "false"
-              }
-      responses: 
-          200:
-            description: Response will have the is_active flag
-            body: 
-              application/json:
-                schema: user-details
-                example: |
-                  {
-                    "dateOfBirth": "19-Nov-1990",
-                    "memberSince": "Jan 2016",
-                    "aboutMe": "et eu exercitation",
-                    "displayName": "tempor dolor",
-                    "lastName": "nulla veniam",
-                    "address": [
-                     {
-                       "city": "ea pariatur commodo dolor",
-                       "state": "deserunt",
-                       "country": "consectetur dolor veniam in dolore"
-                     },
-                     {
-                       "city": "anim",
-                       "country": "nostrud cillum adipisicing dolor"
-                     }
-                    ],
-                    "id": "1234",
-                    "gender": "male",
-                    "isActive": "true"
-                  }
    get:
-      description: This method will authorize the users to third parties
-      body: 
-        application/json:
-          schema: user-details
-          example: |
-            {
-                "dateOfBirth": "19-Nov-1990",
-                "memberSince": "Jan 2016",
-                "aboutMe": "et eu exercitation",
-                "displayName": "tempor dolor",
-                "lastName": "nulla veniam",
-                "address": [
-                    {
-                      "city": "ea pariatur commodo dolor",
-                      "state": "deserunt",
-                      "country": "consectetur dolor veniam in dolore"
-                    },
-                    {
-                      "city": "anim",
-                      "country": "nostrud cillum adipisicing dolor"
-                    }
-                ],
-                "id": "1234",
-                "gender": "male",
-                "isActive": "false"
-              }
-      responses: 
+    description: Authorizes the user
+    queryParameters: 
+      userId:
+        type: string
+        description: userId
+    responses: 
           200:
             description: Response will have the is_active flag
             body: 
@@ -413,36 +365,15 @@ schemas:
                     "gender": "male",
                     "isActive": "true"
                   }
+   
 /unauthorize:
    displayName: unauthorize
-   post:
-      description: this method will unauthorize the users to third parties 
-      body: 
-        application/json:
-          schema: user-details
-          example: |
-            {
-                "dateOfBirth": "19-Nov-1990",
-                "memberSince": "Jan 2016",
-                "aboutMe": "et eu exercitation",
-                "displayName": "tempor dolor",
-                "lastName": "nulla veniam",
-                "address": [
-                    {
-                      "city": "ea pariatur commodo dolor",
-                      "state": "deserunt",
-                      "country": "consectetur dolor veniam in dolore"
-                    },
-                    {
-                      "city": "anim",
-                      "country": "nostrud cillum adipisicing dolor"
-                    }
-                ],
-                "id": "1234",
-                "gender": "male",
-                "isActive": "true"
-              }
-      responses: 
+   get:
+    queryParameters: 
+      userId: 
+       type: string
+       description: user id which needs to be deassociated 
+    responses: 
           200:
             description: Response will have the is_active flag
             body: 

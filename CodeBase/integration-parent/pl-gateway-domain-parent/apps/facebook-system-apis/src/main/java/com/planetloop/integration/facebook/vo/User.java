@@ -1,5 +1,6 @@
 package com.planetloop.integration.facebook.vo;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 /*@JsonPropertyOrder({ "id", "first_name", "last_name", "display_name", "gender", "about_me", "date_of_birth",
 		"member_since", "is_active", "address" })*/
 @JsonAutoDetect
-public class User{
+public class User implements Serializable{
 
 	@JsonProperty("id")
 	private String id;
