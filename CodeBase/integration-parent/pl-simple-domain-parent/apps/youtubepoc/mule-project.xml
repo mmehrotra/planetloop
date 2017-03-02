@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.tooling.server.3.8.0.ee" schemaVersion="5.3.0.0">
+    <name>youtubepoc</name>
+    <description></description>
+    <muleExtension name="Youtube" qualifier="org.mule.tooling.ui.contribution.youtube.3.5.0"/>
+    <muleExtension name="Mule Module CorrelationId" qualifier="org.mule.tooling.ui.contribution.CorrelationId.3.6.0"/>
+</mule-project>

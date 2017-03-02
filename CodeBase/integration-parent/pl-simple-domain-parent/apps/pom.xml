@@ -16,6 +16,7 @@ should be created and kept here.]]>
 	</description>
 
 	<modules>
-		<module>facebookpoc</module>		
+		<module>facebookpoc</module>
+		<module>youtubepoc</module>		
 	</modules>
 </project>

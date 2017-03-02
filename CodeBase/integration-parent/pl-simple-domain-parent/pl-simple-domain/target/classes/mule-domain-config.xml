@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain:mule-domain
+        xmlns="http://www.mulesoft.org/schema/mule/core" 
+xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:wmq="http://www.mulesoft.org/schema/mule/ee/wmq" 
+xmlns:db="http://www.mulesoft.org/schema/mule/db" 
+xmlns:jms="http://www.mulesoft.org/schema/mule/jms" 
+xmlns:domain="http://www.mulesoft.org/schema/mule/ee/domain" 
+xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" 
+xmlns:spring="http://www.springframework.org/schema/beans" 
+xmlns:core="http://www.mulesoft.org/schema/mule/core" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:secure-property-placeholder="http://www.mulesoft.org/schema/mule/secure-property-placeholder"
+xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/domain http://www.mulesoft.org/schema/mule/ee/domain/current/mule-domain-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/ee/wmq/current/mule-wmq-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-property-placeholder 
+http://www.mulesoft.org/schema/mule/secure-property-placeholder/current/mule-secure-property-placeholder.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"
+version="EE-3.7.3">
+
+    <!-- configure here resource to be shared within the domain -->
+	<context:property-placeholder
+		location="file:///${pl.integration.configuration.home}/pl_simple_domain/domain-conf.properties" />
+	
+	<!-- Default Simple domain's HTTP Listener configuration -->
+	<http:listener-config name="SimpleDomainHttpListenerConfiguration"
+		host="${http.listener.host}" port="${http.listener.port}" basePath="${http.listener.base.uri}"
+		doc:name="HTTP Listener Configuration" connectionIdleTimeout="${http.listener.connection.idle.timeout}"
+		doc:description="Common HTTP listener configuration for all mule modules that are to be depoyed on the JTA-Aware-Domain. Properties  for this listener configuration are defined in jta-aware-domain-conf.properties file in ralph integration conf folder.">
+		<http:worker-threading-profile
+			maxThreadsActive="${http.listener.max.active.threads}"
+			maxThreadsIdle="${http.listener.max.idle.threads}" threadTTL="${http.listener.thread.ttl}"
+			threadWaitTimeout="${http.listener.thread.wait.timeout}"
+			maxBufferSize="${http.listener.max.buffer.size}" />
+	</http:listener-config>
+
+</domain:mule-domain>
